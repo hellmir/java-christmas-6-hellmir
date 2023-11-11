@@ -17,5 +17,6 @@ public class EventPlannerController {
     private static void receiveUserInput() {
         String chosenDateInput = InputView.readDate();
         ChosenDate chosenDate = eventPlannerService.parseChosenDate(chosenDateInput);
+        String orderInput = InputView.readOrder();
     }
 }
