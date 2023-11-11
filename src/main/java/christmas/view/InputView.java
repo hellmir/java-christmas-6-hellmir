@@ -7,10 +7,11 @@ import christmas.exception.ExceptionStatus;
 import static christmas.message.InfoMessage.DATE_CHOICE_MESSAGE;
 
 public class InputView {
-    private static String chosenDateInput;
     private static ExceptionStatus exceptionStatus;
 
     public static String readDate() {
+        String chosenDateInput;
+
         do {
             System.out.println(DATE_CHOICE_MESSAGE);
             chosenDateInput = Console.readLine();
