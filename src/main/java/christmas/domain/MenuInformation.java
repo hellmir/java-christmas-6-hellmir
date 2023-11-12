@@ -1,6 +1,6 @@
 package christmas.domain;
 
-public enum OrderMenu {
+public enum MenuInformation {
     BUTTON_MUSHROOM_SOUP("양송이수프", "에피타이저", 6_000),
     TAPAS("타파스", "에피타이저", 5_500),
     CAESAR_SALAD("시저샐러드", "에피타이저", 8_000),
@@ -18,7 +18,7 @@ public enum OrderMenu {
     private final String classification;
     private final int price;
 
-    OrderMenu(String koreanName, String classification, int price) {
+    MenuInformation(String koreanName, String classification, int price) {
         this.koreanName = koreanName;
         this.classification = classification;
         this.price = price;
