@@ -1,7 +1,7 @@
 package christmas.controller;
 
-import christmas.domain.ChosenDate;
 import christmas.domain.Order;
+import christmas.dto.ChosenDateDto;
 import christmas.service.EventPlannerService;
 import christmas.service.EventPlannerServiceImpl;
 import christmas.view.InputView;
@@ -12,11 +12,11 @@ public class EventPlannerController {
 
     public static void runEventPlanner() {
         OutputView.printStartingInfoMessage();
-        ChosenDate chosenDate = receiveDateInput();
         Order order = takeOrder();
+        ChosenDateDto chosenDateDto = receiveDateInput();
     }
 
-    private static ChosenDate receiveDateInput() {
+    private static ChosenDateDto receiveDateInput() {
         while (true) {
             try {
                 String chosenDateInput = InputView.readDate();

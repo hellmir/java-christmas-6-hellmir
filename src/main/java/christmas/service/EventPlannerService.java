@@ -1,10 +1,10 @@
 package christmas.service;
 
-import christmas.domain.ChosenDate;
 import christmas.domain.Order;
+import christmas.dto.ChosenDateDto;
 
 public interface EventPlannerService {
-    ChosenDate parseChosenDate(String chosenDateInput);
+    ChosenDateDto parseChosenDate(String chosenDateInput);
 
     Order generateOrder(String orderInput);
 }

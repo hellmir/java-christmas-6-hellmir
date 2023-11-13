@@ -1,5 +1,6 @@
 package christmas.domain;
 
+import christmas.dto.ChosenDateDto;
 import christmas.validation.InputFormatValidator;
 
 import java.util.Objects;
@@ -27,5 +28,9 @@ public class ChosenDate {
     @Override
     public int hashCode() {
         return Objects.hash(chosenDate);
+    }
+
+    public ChosenDateDto toDto() {
+        return new ChosenDateDto(chosenDate);
     }
 }

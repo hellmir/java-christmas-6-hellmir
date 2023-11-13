@@ -2,11 +2,13 @@ package christmas.service;
 
 import christmas.domain.ChosenDate;
 import christmas.domain.Order;
+import christmas.dto.ChosenDateDto;
 
 public class EventPlannerServiceImpl implements EventPlannerService {
     @Override
-    public ChosenDate parseChosenDate(String chosenDateInput) {
-        return ChosenDate.from(chosenDateInput);
+    public ChosenDateDto parseChosenDate(String chosenDateInput) {
+        ChosenDate chosenDate = ChosenDate.from(chosenDateInput);
+        return chosenDate.toDto();
     }
 
     @Override
