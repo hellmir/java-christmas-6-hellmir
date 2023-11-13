@@ -15,10 +15,6 @@ public class InputFormatValidator {
         validateChosenDateRange(chosenDate);
     }
 
-    public static void validateOrderMenus(String orderMenusInput) {
-        validateMenuName(orderMenusInput);
-    }
-
 
     public static MenuInformation validateMenuName(String koreanMenuName) {
         for (MenuInformation menuInformation : MenuInformation.values()) {
