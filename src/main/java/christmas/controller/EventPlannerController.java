@@ -14,10 +14,24 @@ public class EventPlannerController {
     public static void runEventPlanner() {
         OutputView.printStartingInfoMessage();
         ChosenDate chosenDate = receiveDateInput();
+        Order order = receiveOrderInput();
     }
 
     private static ChosenDate receiveDateInput() {
         String chosenDateInput = InputView.readDate();
         return eventPlannerService.parseChosenDate(chosenDateInput);
+    }
+
+    private static Order receiveOrderInput() {
+        Order order;
+        ExceptionStatus exceptionStatus;
+
+        do {
+            String orderInput = InputView.readOrder();
+            order = new Order();
+            exceptionStatus = eventPlannerService.takeOrder(orderInput, order);
+        } while (exceptionStatus.isOccurred());
+
+        return order;
     }
 }
