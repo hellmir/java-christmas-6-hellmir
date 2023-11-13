@@ -24,6 +24,10 @@ public enum MenuInformation {
         this.price = price;
     }
 
+    public boolean isBeverage() {
+        return classification.equals("음료");
+    }
+
     public String getKoreanName() {
         return koreanName;
     }

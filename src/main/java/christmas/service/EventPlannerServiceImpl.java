@@ -24,6 +24,7 @@ public class EventPlannerServiceImpl implements EventPlannerService {
         }
 
         return ExceptionStatus.NOT_OCCURRED;
+        order.validateOrder();
     }
 
     private String[] parseOrderInput(String orderInput) {
