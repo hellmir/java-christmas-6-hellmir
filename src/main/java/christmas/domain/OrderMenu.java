@@ -1,5 +1,7 @@
 package christmas.domain;
 
+import christmas.dto.OrderMenuDto;
+
 public class OrderMenu {
     private final MenuInformation menuInformation;
     private int menuQuantity;
@@ -18,5 +20,9 @@ public class OrderMenu {
 
     public MenuInformation getMenuInformation() {
         return menuInformation;
+    }
+
+    public OrderMenuDto toDto() {
+        return new OrderMenuDto(menuInformation, menuQuantity);
     }
 }

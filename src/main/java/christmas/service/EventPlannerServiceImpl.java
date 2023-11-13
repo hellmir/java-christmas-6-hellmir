@@ -3,6 +3,7 @@ package christmas.service;
 import christmas.domain.ChosenDate;
 import christmas.domain.Order;
 import christmas.dto.ChosenDateDto;
+import christmas.dto.OrderDto;
 
 public class EventPlannerServiceImpl implements EventPlannerService {
     @Override
@@ -12,7 +13,7 @@ public class EventPlannerServiceImpl implements EventPlannerService {
     }
 
     @Override
-    public Order generateOrder(String orderInput) {
+    public OrderDto generateOrder(String orderInput) {
         String[] orderMenuNamesAndQuantities = parseOrderInput(orderInput);
         Order order = new Order();
 
@@ -22,7 +23,7 @@ public class EventPlannerServiceImpl implements EventPlannerService {
 
         order.validateOrder();
 
-        return order;
+        return order.toDto();
     }
 
     private String[] parseOrderInput(String orderInput) {

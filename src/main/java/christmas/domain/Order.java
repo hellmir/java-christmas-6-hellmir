@@ -1,5 +1,7 @@
 package christmas.domain;
 
+import christmas.dto.OrderDto;
+import christmas.dto.OrderMenuDto;
 import christmas.validation.InputFormatValidator;
 
 import java.util.ArrayList;
@@ -60,12 +62,13 @@ public class Order {
         throw new IllegalArgumentException(ERROR_MESSAGE_HEAD + ONLY_BEVERAGES_ORDERED_EXCEPTION);
     }
 
-    public OrderMenu get(int index) {
-        return orderMenus.get(index);
-    }
+    public OrderDto toDto() {
+        List<OrderMenuDto> orderMenuDtos = new ArrayList<>();
+        for (OrderMenu orderMenu : orderMenus) {
+            orderMenuDtos.add(orderMenu.toDto());
+        }
 
-    public int size() {
-        return orderMenus.size();
+        return new OrderDto(orderMenuDtos);
     }
 
     private void validateTotalMenuQuantity() {
