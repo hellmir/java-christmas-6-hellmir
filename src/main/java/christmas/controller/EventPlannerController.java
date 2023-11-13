@@ -1,6 +1,8 @@
 package christmas.controller;
 
 import christmas.domain.ChosenDate;
+import christmas.domain.Order;
+import christmas.exception.ExceptionStatus;
 import christmas.service.EventPlannerService;
 import christmas.service.EventPlannerServiceImpl;
 import christmas.view.InputView;
@@ -11,12 +13,11 @@ public class EventPlannerController {
 
     public static void runEventPlanner() {
         OutputView.printStartingInfoMessage();
-        receiveUserInput();
+        ChosenDate chosenDate = receiveDateInput();
     }
 
-    private static void receiveUserInput() {
+    private static ChosenDate receiveDateInput() {
         String chosenDateInput = InputView.readDate();
-        ChosenDate chosenDate = eventPlannerService.parseChosenDate(chosenDateInput);
-        String orderInput = InputView.readOrder();
+        return eventPlannerService.parseChosenDate(chosenDateInput);
     }
 }
