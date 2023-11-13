@@ -9,7 +9,7 @@ public class OrderMenu {
     }
 
     public void addMenuQuantity(int menuQuantity) {
-        ++menuQuantity;
+        this.menuQuantity += menuQuantity;
     }
 
     public boolean isSameMenu(OrderMenu orderMenu) {
