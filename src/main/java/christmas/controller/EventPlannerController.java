@@ -2,7 +2,6 @@ package christmas.controller;
 
 import christmas.domain.ChosenDate;
 import christmas.domain.Order;
-import christmas.exception.ExceptionStatus;
 import christmas.service.EventPlannerService;
 import christmas.service.EventPlannerServiceImpl;
 import christmas.view.InputView;
@@ -14,24 +13,28 @@ public class EventPlannerController {
     public static void runEventPlanner() {
         OutputView.printStartingInfoMessage();
         ChosenDate chosenDate = receiveDateInput();
-        Order order = receiveOrderInput();
+        Order order = takeOrder();
     }
 
     private static ChosenDate receiveDateInput() {
-        String chosenDateInput = InputView.readDate();
-        return eventPlannerService.parseChosenDate(chosenDateInput);
+        while (true) {
+            try {
+                String chosenDateInput = InputView.readDate();
+                return eventPlannerService.parseChosenDate(chosenDateInput);
+            } catch (IllegalArgumentException e) {
+                OutputView.printMessage(e.getMessage());
+            }
+        }
     }
 
-    private static Order receiveOrderInput() {
-        Order order;
-        ExceptionStatus exceptionStatus;
-
-        do {
-            String orderInput = InputView.readOrder();
-            order = new Order();
-            exceptionStatus = eventPlannerService.takeOrder(orderInput, order);
-        } while (exceptionStatus.isOccurred());
-
-        return order;
+    private static Order takeOrder() {
+        while (true) {
+            try {
+                String orderInput = InputView.readOrder();
+                return eventPlannerService.generateOrder(orderInput);
+            } catch (IllegalArgumentException e) {
+                OutputView.printMessage(e.getMessage());
+            }
+        }
     }
 }

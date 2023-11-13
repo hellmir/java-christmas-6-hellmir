@@ -1,5 +1,7 @@
 package christmas.domain;
 
+import christmas.validation.InputFormatValidator;
+
 public class ChosenDate {
     private final int chosenDate;
 
@@ -8,6 +10,7 @@ public class ChosenDate {
     }
 
     public static ChosenDate from(String chosenDateInput) {
+        InputFormatValidator.validateChosenDate(chosenDateInput);
         return new ChosenDate(Integer.parseInt(chosenDateInput));
     }
 }

@@ -2,7 +2,6 @@ package christmas.service;
 
 import christmas.domain.ChosenDate;
 import christmas.domain.Order;
-import christmas.exception.ExceptionStatus;
 
 public class EventPlannerServiceImpl implements EventPlannerService {
     @Override
@@ -11,20 +10,17 @@ public class EventPlannerServiceImpl implements EventPlannerService {
     }
 
     @Override
-    public ExceptionStatus takeOrder(String orderInput, Order order) {
+    public Order generateOrder(String orderInput) {
         String[] orderMenuNamesAndQuantities = parseOrderInput(orderInput);
+        Order order = new Order();
 
-        try {
-            for (String orderMenuNameAndQuantity : orderMenuNamesAndQuantities) {
-                order.addOrderMenu(orderMenuNameAndQuantity.split("-"));
-            }
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            return ExceptionStatus.OCCURRED;
+        for (String orderMenuNameAndQuantity : orderMenuNamesAndQuantities) {
+            order.addOrderMenu(orderMenuNameAndQuantity.split("-"));
         }
 
-        return ExceptionStatus.NOT_OCCURRED;
         order.validateOrder();
+
+        return order;
     }
 
     private String[] parseOrderInput(String orderInput) {

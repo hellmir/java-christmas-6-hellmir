@@ -46,6 +46,14 @@ public class Order {
         throw new IllegalArgumentException(ERROR_MESSAGE_HEAD + ONLY_BEVERAGES_ORDERED_EXCEPTION);
     }
 
+    public OrderMenu get(int index) {
+        return orderMenus.get(index);
+    }
+
+    public int size() {
+        return orderMenus.size();
+    }
+
     private void validateTotalMenuQuantity() {
         if (totalMenuQuantity <= MAX_MENU_QUANTITY) {
             return;
