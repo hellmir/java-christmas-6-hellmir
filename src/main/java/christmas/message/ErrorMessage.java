@@ -6,7 +6,7 @@ public class ErrorMessage {
     public static final String ERROR_MESSAGE_HEAD = "[ERROR] ";
     public static final String INVALID_DATE_EXCEPTION = "유효하지 않은 날짜입니다. 다시 입력해 주세요.";
     public static final String INVALID_ORDER_EXCEPTION = "유효하지 않은 주문입니다. 다시 입력해 주세요.";
-    public static final String MENU_QUANTITY_EXCESSED_EXCEPTION
+    public static final String MENU_QUANTITY_EXCEEDED_EXCEPTION
             = "총 메뉴 개수는 " + MAX_MENU_QUANTITY + "개를 초과할 수 없습니다. "
             + MAX_MENU_QUANTITY + "개 이하의 메뉴를 입력해 주세요.";
     public static final String ONLY_BEVERAGES_ORDERED_EXCEPTION
