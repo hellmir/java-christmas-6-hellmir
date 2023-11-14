@@ -6,11 +6,14 @@ import java.util.Objects;
 
 import static christmas.configuration.EventConfig.EVENT_APPLIED_AMOUNT;
 import static christmas.configuration.EventConfig.GIVEAWAY_APPLIED_AMOUNT;
+import static christmas.message.ErrorMessage.ERROR_MESSAGE_HEAD;
+import static christmas.message.ErrorMessage.PAYMENT_AMOUNT_UNDER_ZERO_EXCEPTION;
 
 public class Payment {
     private int paymentAmount;
 
     public Payment(int paymentAmount) {
+        validate(paymentAmount);
         this.paymentAmount = paymentAmount;
     }
 
@@ -41,5 +44,11 @@ public class Payment {
 
     public boolean isGiveawayApplied() {
         return paymentAmount >= GIVEAWAY_APPLIED_AMOUNT;
+    }
+
+    private void validate(int paymentAmount) {
+        if (paymentAmount < 0) {
+            throw new IllegalArgumentException(ERROR_MESSAGE_HEAD + PAYMENT_AMOUNT_UNDER_ZERO_EXCEPTION + paymentAmount);
+        }
     }
 }
