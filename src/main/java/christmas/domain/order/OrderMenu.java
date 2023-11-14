@@ -10,7 +10,7 @@ public class OrderMenu {
         this.menuInformation = menuInformation;
     }
 
-    private OrderMenu(MenuInformation menuInformation, int menuQuantity) {
+    public OrderMenu(MenuInformation menuInformation, int menuQuantity) {
         this.menuInformation = menuInformation;
         this.menuQuantity = menuQuantity;
     }
