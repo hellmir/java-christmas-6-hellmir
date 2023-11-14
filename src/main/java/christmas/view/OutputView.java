@@ -31,4 +31,8 @@ public class OutputView {
         System.out.printf("%s %d개\n",
                 orderMenuDto.getMenuInformation().getKoreanName(), orderMenuDto.getMenuQuantity());
     }
+
+    public static void printTotalOrderPriceHead() {
+        System.out.println(TOTAL_ORDER_PRICE_MESSAGE_HEAD);
+    }
 }

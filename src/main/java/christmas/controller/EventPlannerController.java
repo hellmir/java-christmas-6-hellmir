@@ -22,6 +22,7 @@ public class EventPlannerController {
         PrintHandler.printOrderMenus(orderDto);
 
         PaymentDto paymentDto = eventPlannerService.computeTotalPayment(orderDto);
+        PrintHandler.printTotalOrderPrice(paymentDto);
     }
 
     private static ChosenDateDto receiveDateInput() {
