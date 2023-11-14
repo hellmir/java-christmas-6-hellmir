@@ -15,4 +15,5 @@ public class InfoMessage {
 
     public static final String FIRST_RESULT_MESSAGE_HEAD = PeriodConfig.MONTH.getMonthNumber() + "월 ";
     public static final String SECOND_RESULT_MESSAGE_HEAD = "일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!";
+    public static final String ORDER_MENUS_MESSAGE_HEAD = "<주문 메뉴>";
 }

@@ -7,6 +7,7 @@ import christmas.service.EventPlannerService;
 import christmas.service.EventPlannerServiceImpl;
 import christmas.view.InputView;
 import christmas.view.OutputView;
+import christmas.view.PrintHandler;
 
 public class EventPlannerController {
     private static final EventPlannerService eventPlannerService = new EventPlannerServiceImpl();
@@ -18,6 +19,8 @@ public class EventPlannerController {
         OrderDto orderDto = takeOrder();
 
         OutputView.printResultHead(chosenDateDto);
+        PrintHandler.printOrderMenus(orderDto);
+
         PaymentDto paymentDto = eventPlannerService.computeTotalPayment(orderDto);
     }
 
