@@ -18,7 +18,11 @@ public class EventInfo {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         EventInfo eventInfo = (EventInfo) o;
-        return Objects.equals(giveaway, eventInfo.giveaway) && Objects.equals(christmasDiscount, eventInfo.christmasDiscount) && Objects.equals(weekdayDiscount, eventInfo.weekdayDiscount) && Objects.equals(weekendDiscount, eventInfo.weekendDiscount) && Objects.equals(badge, eventInfo.badge);
+        return Objects.equals(giveaway, eventInfo.giveaway)
+                && Objects.equals(christmasDiscount, eventInfo.christmasDiscount)
+                && Objects.equals(weekdayDiscount, eventInfo.weekdayDiscount)
+                && Objects.equals(weekendDiscount, eventInfo.weekendDiscount)
+                && Objects.equals(badge, eventInfo.badge);
     }
 
     @Override
