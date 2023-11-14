@@ -10,6 +10,15 @@ public class OrderMenu {
         this.menuInformation = menuInformation;
     }
 
+    private OrderMenu(MenuInformation menuInformation, int menuQuantity) {
+        this.menuInformation = menuInformation;
+        this.menuQuantity = menuQuantity;
+    }
+
+    public static OrderMenu from(OrderMenuDto orderMenuDto) {
+        return new OrderMenu(orderMenuDto.getMenuInformation(), orderMenuDto.getMenuQuantity());
+    }
+
     public void addMenuQuantity(int menuQuantity) {
         this.menuQuantity += menuQuantity;
     }

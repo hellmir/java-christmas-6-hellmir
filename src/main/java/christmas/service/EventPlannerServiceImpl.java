@@ -1,16 +1,12 @@
 package christmas.service;
 
 import christmas.domain.event.ChosenDate;
-import christmas.domain.order.MenuInformation;
+import christmas.domain.event.EventInfo;
 import christmas.domain.order.Order;
-import christmas.domain.order.OrderMenu;
 import christmas.domain.order.Payment;
 import christmas.dto.ChosenDateDto;
 import christmas.dto.OrderDto;
 import christmas.dto.PaymentDto;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class EventPlannerServiceImpl implements EventPlannerService {
     @Override
@@ -35,23 +31,15 @@ public class EventPlannerServiceImpl implements EventPlannerService {
 
     @Override
     public PaymentDto computeTotalPayment(OrderDto orderDto) {
-        Order order = dtoToDomain(orderDto);
+        Order order = Order.from(orderDto);
         Payment payment = new Payment(order.computeTotalOrderPrice());
         return payment.toDto();
     }
-
-    private Order dtoToDomain(OrderDto orderDto) {
-        List<OrderMenu> orderMenus = new ArrayList<>();
-
-        for (int i = 0; i < orderDto.size(); i++) {
-            MenuInformation menuInformation = orderDto.getOrderMenuDtos().get(i).getMenuInformation();
-            orderMenus.add(new OrderMenu(menuInformation));
-        }
-
-        return Order.of(orderMenus);
-    }
-
+    
     private String[] parseOrderInput(String orderInput) {
         return orderInput.split(",");
+    }
+
+    private void computeGiveawayApplication(EventInfo eventInfo, Payment payment) {
     }
 }

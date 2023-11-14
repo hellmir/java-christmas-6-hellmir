@@ -19,11 +19,19 @@ public class Order {
         orderMenus = new ArrayList<>();
     }
 
-    private Order(List<OrderMenu> orderMenus) {
+    public Order(List<OrderMenu> orderMenus) {
         this.orderMenus = orderMenus;
     }
 
-    public static Order of(List<OrderMenu> orderMenus) {
+    public static Order from(OrderDto orderDto) {
+        List<OrderMenu> orderMenus = new ArrayList<>();
+
+        for (int i = 0; i < orderDto.size(); i++) {
+            OrderMenuDto orderMenuDto = orderDto.getOrderMenuDtos().get(i);
+            OrderMenu orderMenu = OrderMenu.from(orderMenuDto);
+            orderMenus.add(orderMenu);
+        }
+
         return new Order(orderMenus);
     }
 

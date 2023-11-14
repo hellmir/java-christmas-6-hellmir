@@ -43,10 +43,10 @@ class OrderTest {
         List<OrderMenu> orderMenus = TestObjectFactory.setOrderMenus();
 
         // when
-        Order order = Order.of(orderMenus);
+        Order order = new Order(orderMenus);
 
         // then
-        assertThat(order).isEqualTo(Order.of(orderMenus));
+        assertThat(order).isEqualTo(new Order(orderMenus));
     }
 
     @DisplayName("총주문 금액을 계산한다.")
@@ -54,7 +54,7 @@ class OrderTest {
     void computeTotalOrderPrice() {
         // given
         List<OrderMenu> orderMenus = TestObjectFactory.setOrderMenus();
-        Order order = Order.of(orderMenus);
+        Order order = new Order(orderMenus);
 
         // when
         int totalPrice = order.computeTotalOrderPrice();

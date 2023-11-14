@@ -148,7 +148,7 @@ class EventPlannerServiceTest {
     void computeTotalPayment() {
         // given
         List<OrderMenu> orderMenus = TestObjectFactory.setOrderMenus();
-        Order order = Order.of(orderMenus);
+        Order order = new Order(orderMenus);
         OrderDto orderDto = order.toDto();
 
         // when
