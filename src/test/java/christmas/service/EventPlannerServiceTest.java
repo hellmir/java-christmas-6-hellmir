@@ -1,9 +1,14 @@
 package christmas.service;
 
+import christmas.domain.order.Order;
+import christmas.domain.order.OrderMenu;
 import christmas.dto.ChosenDateDto;
 import christmas.dto.OrderDto;
 import christmas.dto.OrderMenuDto;
+import christmas.dto.PaymentDto;
+import christmas.testutil.TestObjectFactory;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -11,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static christmas.message.ErrorMessage.*;
+import static christmas.testutil.TestConstant.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
@@ -135,6 +141,22 @@ class EventPlannerServiceTest {
         assertThatThrownBy(() -> eventPlannerService.generateOrder(orderInput))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ERROR_MESSAGE_HEAD + MENU_QUANTITY_EXCEEDED_EXCEPTION);
+    }
+
+    @DisplayName("전송된 주문 정보를 토대로 총주문 금액을 계산한다.")
+    @Test
+    void computeTotalPayment() {
+        // given
+        List<OrderMenu> orderMenus = TestObjectFactory.setOrderMenus();
+        Order order = Order.of(orderMenus);
+        OrderDto orderDto = order.toDto();
+
+        // when
+        PaymentDto paymentDto = eventPlannerService.computeTotalPayment(orderDto);
+
+        // then
+        assertThat(paymentDto.getPayment())
+                .isEqualTo(MENU1.getPrice() + MENU2.getPrice() + MENU3.getPrice() + MENU4.getPrice());
     }
 
     private void setOrderInformation(String orderInput, List<String> koreanMenuNames, List<Integer> menuQuantities) {
