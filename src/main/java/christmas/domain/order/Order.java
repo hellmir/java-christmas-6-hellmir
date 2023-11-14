@@ -32,6 +32,15 @@ public class Order {
         return Objects.hash(orderMenus, totalMenuQuantity);
     }
 
+    public OrderDto toDto() {
+        List<OrderMenuDto> orderMenuDtos = new ArrayList<>();
+        for (OrderMenu orderMenu : orderMenus) {
+            orderMenuDtos.add(orderMenu.toDto());
+        }
+
+        return new OrderDto(orderMenuDtos);
+    }
+
     public void addOrderMenu(String[] orderMenuNameAndQuantity) {
         String koreanMenuName = orderMenuNameAndQuantity[0];
         MenuInformation menuInformation = InputFormatValidator.validateMenuName(koreanMenuName);
@@ -58,24 +67,15 @@ public class Order {
                 return;
             }
         }
-
+        
         throw new IllegalArgumentException(ERROR_MESSAGE_HEAD + ONLY_BEVERAGES_ORDERED_EXCEPTION);
-    }
-
-    public OrderDto toDto() {
-        List<OrderMenuDto> orderMenuDtos = new ArrayList<>();
-        for (OrderMenu orderMenu : orderMenus) {
-            orderMenuDtos.add(orderMenu.toDto());
-        }
-
-        return new OrderDto(orderMenuDtos);
     }
 
     private void validateTotalMenuQuantity() {
         if (totalMenuQuantity <= MAX_MENU_QUANTITY) {
             return;
         }
-        
+
         throw new IllegalArgumentException(ERROR_MESSAGE_HEAD + MENU_QUANTITY_EXCEEDED_EXCEPTION);
     }
 
