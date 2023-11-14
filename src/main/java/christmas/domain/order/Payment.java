@@ -13,6 +13,10 @@ public class Payment {
         this.payment = payment;
     }
 
+    public static Payment from(PaymentDto paymentDto) {
+        return new Payment(paymentDto.getPayment());
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

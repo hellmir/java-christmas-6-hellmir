@@ -35,11 +35,20 @@ public class EventPlannerServiceImpl implements EventPlannerService {
         Payment payment = new Payment(order.computeTotalOrderPrice());
         return payment.toDto();
     }
-    
-    private String[] parseOrderInput(String orderInput) {
-        return orderInput.split(",");
+
+    @Override
+    public EventInfo computeEventApplication(ChosenDateDto chosenDateDto, OrderDto orderDto, PaymentDto paymentDto) {
+        Payment payment = Payment.from(paymentDto);
+        EventInfo eventInfo = new EventInfo();
+
+        if (!payment.isEventApplied()) {
+            return eventInfo;
+        }
+
+        return null;
     }
 
-    private void computeGiveawayApplication(EventInfo eventInfo, Payment payment) {
+    private String[] parseOrderInput(String orderInput) {
+        return orderInput.split(",");
     }
 }

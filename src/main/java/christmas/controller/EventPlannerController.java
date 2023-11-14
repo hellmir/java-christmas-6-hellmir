@@ -1,5 +1,6 @@
 package christmas.controller;
 
+import christmas.domain.event.EventInfo;
 import christmas.dto.ChosenDateDto;
 import christmas.dto.OrderDto;
 import christmas.dto.PaymentDto;
@@ -17,12 +18,13 @@ public class EventPlannerController {
 
         ChosenDateDto chosenDateDto = receiveDateInput();
         OrderDto orderDto = takeOrder();
-
         OutputView.printResultHead(chosenDateDto);
         PrintHandler.printOrderMenus(orderDto);
 
         PaymentDto paymentDto = eventPlannerService.computeTotalPayment(orderDto);
         PrintHandler.printTotalOrderPrice(paymentDto);
+
+        EventInfo eventInfo = eventPlannerService.computeEventApplication(chosenDateDto, orderDto, paymentDto);
     }
 
     private static ChosenDateDto receiveDateInput() {
