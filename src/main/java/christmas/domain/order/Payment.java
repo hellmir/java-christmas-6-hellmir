@@ -5,6 +5,7 @@ import christmas.dto.PaymentDto;
 import java.util.Objects;
 
 import static christmas.configuration.EventConfig.EVENT_APPLIED_AMOUNT;
+import static christmas.configuration.EventConfig.GIVEAWAY_APPLIED_AMOUNT;
 
 public class Payment {
     private int payment;
@@ -36,5 +37,9 @@ public class Payment {
 
     public PaymentDto toDto() {
         return new PaymentDto(payment);
+    }
+
+    public boolean isGiveawayApplied() {
+        return payment >= GIVEAWAY_APPLIED_AMOUNT;
     }
 }

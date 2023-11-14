@@ -45,6 +45,7 @@ public class EventPlannerServiceImpl implements EventPlannerService {
             return eventInfo;
         }
 
+        eventInfo.updateGiveawayApplication(payment);
         return null;
     }
 
