@@ -8,38 +8,38 @@ import static christmas.configuration.EventConfig.EVENT_APPLIED_AMOUNT;
 import static christmas.configuration.EventConfig.GIVEAWAY_APPLIED_AMOUNT;
 
 public class Payment {
-    private int payment;
+    private int paymentAmount;
 
-    public Payment(int payment) {
-        this.payment = payment;
+    public Payment(int paymentAmount) {
+        this.paymentAmount = paymentAmount;
     }
 
     public static Payment from(PaymentDto paymentDto) {
-        return new Payment(paymentDto.getPayment());
+        return new Payment(paymentDto.getPaymentAmount());
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Payment payment1 = (Payment) o;
-        return payment == payment1.payment;
+        Payment payment = (Payment) o;
+        return paymentAmount == payment.paymentAmount;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(payment);
+        return Objects.hash(paymentAmount);
     }
 
     public boolean isEventApplied() {
-        return payment >= EVENT_APPLIED_AMOUNT;
+        return paymentAmount >= EVENT_APPLIED_AMOUNT;
     }
 
     public PaymentDto toDto() {
-        return new PaymentDto(payment);
+        return new PaymentDto(paymentAmount);
     }
 
     public boolean isGiveawayApplied() {
-        return payment >= GIVEAWAY_APPLIED_AMOUNT;
+        return paymentAmount >= GIVEAWAY_APPLIED_AMOUNT;
     }
 }

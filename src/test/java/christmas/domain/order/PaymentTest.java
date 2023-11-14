@@ -6,15 +6,15 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class PaymentTest {
-    private static int PAYMENT = 10_000;
+    private static int PAYMENT_AMOUNT = 10_000;
 
     @DisplayName("동일한 금액을 전송하면 동등한 Payment 인스턴스를 생성한다.")
     @Test
     void create() {
         // given, when
-        Payment payment = new Payment(PAYMENT);
+        Payment payment = new Payment(PAYMENT_AMOUNT);
 
         // then
-        assertThat(payment).isEqualTo(new Payment(PAYMENT));
+        assertThat(payment).isEqualTo(new Payment(PAYMENT_AMOUNT));
     }
 }

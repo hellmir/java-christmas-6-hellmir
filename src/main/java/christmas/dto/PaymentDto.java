@@ -1,13 +1,13 @@
 package christmas.dto;
 
 public class PaymentDto {
-    private int payment;
+    private int paymentAmount;
 
-    public PaymentDto(int payment) {
-        this.payment = payment;
+    public PaymentDto(int paymentAmount) {
+        this.paymentAmount = paymentAmount;
     }
 
-    public int getPayment() {
-        return payment;
+    public int getPaymentAmount() {
+        return paymentAmount;
     }
 }
