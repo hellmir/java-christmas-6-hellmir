@@ -1,7 +1,7 @@
 package christmas.message;
 
 import christmas.configuration.PeriodConfig;
-import christmas.domain.MenuInformation;
+import christmas.domain.order.MenuInformation;
 
 public class InfoMessage {
     public static final String STARTING_INFO_MESSAGE = "안녕하세요! 우테코 식당 "

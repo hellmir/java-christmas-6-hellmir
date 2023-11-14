@@ -1,4 +1,4 @@
-package christmas.domain;
+package christmas.domain.order;
 
 import christmas.dto.OrderDto;
 import christmas.dto.OrderMenuDto;
@@ -75,8 +75,8 @@ public class Order {
         if (totalMenuQuantity <= MAX_MENU_QUANTITY) {
             return;
         }
-
-        throw new IllegalArgumentException(ERROR_MESSAGE_HEAD + MENU_QUANTITY_EXCESSED_EXCEPTION);
+        
+        throw new IllegalArgumentException(ERROR_MESSAGE_HEAD + MENU_QUANTITY_EXCEEDED_EXCEPTION);
     }
 
     private boolean checkBeverage(OrderMenu orderMenu) {

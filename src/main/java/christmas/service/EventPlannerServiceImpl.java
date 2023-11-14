@@ -1,7 +1,7 @@
 package christmas.service;
 
-import christmas.domain.ChosenDate;
-import christmas.domain.Order;
+import christmas.domain.event.ChosenDate;
+import christmas.domain.order.Order;
 import christmas.dto.ChosenDateDto;
 import christmas.dto.OrderDto;
 

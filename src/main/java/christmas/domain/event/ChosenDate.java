@@ -1,4 +1,4 @@
-package christmas.domain;
+package christmas.domain.event;
 
 import christmas.dto.ChosenDateDto;
 import christmas.validation.InputFormatValidator;

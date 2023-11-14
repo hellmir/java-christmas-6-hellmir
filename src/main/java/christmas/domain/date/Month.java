@@ -1,4 +1,4 @@
-package christmas.domain;
+package christmas.domain.date;
 
 public enum Month {
     DECEMBER("12월", 12, 31);

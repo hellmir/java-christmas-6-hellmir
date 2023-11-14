@@ -1,7 +1,7 @@
 package christmas.validation;
 
-import christmas.domain.MenuInformation;
-import christmas.domain.OrderMenu;
+import christmas.domain.order.MenuInformation;
+import christmas.domain.order.OrderMenu;
 
 import java.util.List;
 

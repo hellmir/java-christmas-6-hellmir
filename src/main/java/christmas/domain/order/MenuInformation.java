@@ -1,4 +1,4 @@
-package christmas.domain;
+package christmas.domain.order;
 
 public enum MenuInformation {
     BUTTON_MUSHROOM_SOUP("양송이수프", "에피타이저", 6_000),

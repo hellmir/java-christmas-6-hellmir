@@ -1,8 +1,8 @@
 package christmas.configuration;
 
-import christmas.domain.Month;
+import christmas.domain.date.Month;
 
-import static christmas.domain.Month.DECEMBER;
+import static christmas.domain.date.Month.DECEMBER;
 
 public class PeriodConfig {
     public static final int YEAR = 2023;
