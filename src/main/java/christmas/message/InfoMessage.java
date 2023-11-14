@@ -12,4 +12,7 @@ public class InfoMessage {
             + MenuInformation.SEAFOOD_PASTA.getKoreanName() + "-2,"
             + MenuInformation.RED_WINE.getKoreanName() + "-1,"
             + MenuInformation.CHOCOLATE_CAKE.getKoreanName() + "-1)";
+
+    public static final String FIRST_RESULT_MESSAGE_HEAD = PeriodConfig.MONTH.getMonthNumber() + "월 ";
+    public static final String SECOND_RESULT_MESSAGE_HEAD = "일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!";
 }

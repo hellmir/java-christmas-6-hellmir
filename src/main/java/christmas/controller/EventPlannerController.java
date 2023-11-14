@@ -16,6 +16,8 @@ public class EventPlannerController {
 
         ChosenDateDto chosenDateDto = receiveDateInput();
         OrderDto orderDto = takeOrder();
+
+        OutputView.printResultHead(chosenDateDto);
         PaymentDto paymentDto = eventPlannerService.computeTotalPayment(orderDto);
     }
 
