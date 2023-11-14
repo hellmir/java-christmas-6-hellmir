@@ -31,4 +31,8 @@ public enum MenuInformation {
     public String getKoreanName() {
         return koreanName;
     }
+
+    public int getPrice() {
+        return price;
+    }
 }

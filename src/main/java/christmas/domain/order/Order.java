@@ -19,6 +19,14 @@ public class Order {
         orderMenus = new ArrayList<>();
     }
 
+    private Order(List<OrderMenu> orderMenus) {
+        this.orderMenus = orderMenus;
+    }
+
+    public static Order of(List<OrderMenu> orderMenus) {
+        return new Order(orderMenus);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -67,8 +75,19 @@ public class Order {
                 return;
             }
         }
-        
+
         throw new IllegalArgumentException(ERROR_MESSAGE_HEAD + ONLY_BEVERAGES_ORDERED_EXCEPTION);
+    }
+
+    public int computeTotalOrderPrice() {
+        int totalPrice = 0;
+
+        for (int i = 0; i < orderMenus.size(); i++) {
+            MenuInformation menu = orderMenus.get(i).getMenuInformation();
+            totalPrice += menu.getPrice();
+        }
+
+        return totalPrice;
     }
 
     private void validateTotalMenuQuantity() {

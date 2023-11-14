@@ -2,6 +2,7 @@ package christmas.controller;
 
 import christmas.dto.ChosenDateDto;
 import christmas.dto.OrderDto;
+import christmas.dto.PaymentDto;
 import christmas.service.EventPlannerService;
 import christmas.service.EventPlannerServiceImpl;
 import christmas.view.InputView;
@@ -15,6 +16,7 @@ public class EventPlannerController {
 
         ChosenDateDto chosenDateDto = receiveDateInput();
         OrderDto orderDto = takeOrder();
+        PaymentDto paymentDto = eventPlannerService.computeTotalPayment(orderDto);
     }
 
     private static ChosenDateDto receiveDateInput() {
