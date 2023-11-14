@@ -56,10 +56,15 @@ class OrderTest {
         List<OrderMenu> orderMenus = TestObjectFactory.setOrderMenus();
         Order order = new Order(orderMenus);
 
+        int menuPrice1 = MENU1.getPrice() * QUANTITY1;
+        int menuPrice2 = MENU2.getPrice() * QUANTITY2;
+        int menuPrice3 = MENU3.getPrice() * QUANTITY3;
+        int menuPrice4 = MENU4.getPrice() * QUANTITY4;
+
         // when
         int totalPrice = order.computeTotalOrderPrice();
 
         // then
-        assertThat(totalPrice).isEqualTo(MENU1.getPrice() + MENU2.getPrice() + MENU3.getPrice() + MENU4.getPrice());
+        assertThat(totalPrice).isEqualTo(menuPrice1 + menuPrice2 + menuPrice3 + menuPrice4);
     }
 }

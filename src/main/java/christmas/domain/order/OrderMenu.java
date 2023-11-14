@@ -34,4 +34,8 @@ public class OrderMenu {
     public OrderMenuDto toDto() {
         return new OrderMenuDto(menuInformation, menuQuantity);
     }
+
+    public int computeMenuPrice() {
+        return menuInformation.getPrice() * menuQuantity;
+    }
 }

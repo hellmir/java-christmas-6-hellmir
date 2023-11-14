@@ -91,8 +91,8 @@ public class Order {
         int totalPrice = 0;
 
         for (int i = 0; i < orderMenus.size(); i++) {
-            MenuInformation menu = orderMenus.get(i).getMenuInformation();
-            totalPrice += menu.getPrice();
+            OrderMenu orderMenu = orderMenus.get(i);
+            totalPrice += orderMenu.computeMenuPrice();
         }
 
         return totalPrice;

@@ -151,12 +151,16 @@ class EventPlannerServiceTest {
         Order order = new Order(orderMenus);
         OrderDto orderDto = order.toDto();
 
+        int menuPrice1 = MENU1.getPrice() * QUANTITY1;
+        int menuPrice2 = MENU2.getPrice() * QUANTITY2;
+        int menuPrice3 = MENU3.getPrice() * QUANTITY3;
+        int menuPrice4 = MENU4.getPrice() * QUANTITY4;
+
         // when
         PaymentDto paymentDto = eventPlannerService.computeTotalPayment(orderDto);
 
         // then
-        assertThat(paymentDto.getPayment())
-                .isEqualTo(MENU1.getPrice() + MENU2.getPrice() + MENU3.getPrice() + MENU4.getPrice());
+        assertThat(paymentDto.getPayment()).isEqualTo(menuPrice1 + menuPrice2 + menuPrice3 + menuPrice4);
     }
 
     private void setOrderInformation(String orderInput, List<String> koreanMenuNames, List<Integer> menuQuantities) {
