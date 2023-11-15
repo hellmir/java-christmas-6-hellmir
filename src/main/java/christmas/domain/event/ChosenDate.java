@@ -60,4 +60,12 @@ public class ChosenDate {
 
         return DayInfo.valueOf(DayOfWeek).isWeekday();
     }
+
+    public boolean isSpecialDay() {
+        if (chosenDate == 25 || chosenDate % 7 == 3) {
+            return true;
+        }
+
+        return false;
+    }
 }
