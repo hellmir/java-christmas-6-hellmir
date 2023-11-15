@@ -1,6 +1,7 @@
 package christmas.service;
 
 import christmas.domain.event.Badge;
+import christmas.domain.event.ChosenDate;
 import christmas.domain.order.MenuInformation;
 import christmas.domain.order.Order;
 import christmas.domain.order.OrderMenu;
@@ -18,6 +19,8 @@ import org.junit.jupiter.params.provider.CsvSource;
 import java.util.ArrayList;
 import java.util.List;
 
+import static christmas.configuration.EventConfig.BASIC_CHRISTMAS_DISCOUNT_AMOUNT;
+import static christmas.configuration.EventConfig.CHRISTMAS_DISCOUNT_INCREASE;
 import static christmas.domain.order.MenuInformation.CHAMPAGNE;
 import static christmas.message.ErrorMessage.*;
 import static christmas.testutil.TestConstant.*;
@@ -225,6 +228,51 @@ class EventPlannerServiceTest {
 
         // then
         assertThat(giveaway.isNone()).isTrue();
+    }
+
+    @DisplayName("25일 이전의 날짜와 할인 가능한 예상 결제 금액을 전송하면 크리스마이 디데이 이벤트가 적용된다.")
+    @ParameterizedTest
+    @CsvSource({"1, 30_000",
+            "10, 10_000",
+            "15, 119_999",
+            "25, 120_000"})
+    void computeEventApplicationWithTwentyFifthOrEarlierAndDiscountAvailableAmount
+            (String chosenDateInput, int paymentAmount) {
+        // given
+        OrderDto orderDto = mock(OrderDto.class);
+        ChosenDateDto chosenDateDto = ChosenDate.from(chosenDateInput).toDto();
+        PaymentDto paymentDto = new PaymentDto(paymentAmount);
+
+        // when
+        EventInfoDto eventInfoDto = eventPlannerService.computeEventApplication(chosenDateDto, orderDto, paymentDto);
+        int christmasDiscountAmount = eventInfoDto.getChristmasDiscountDto().getDiscountDto().getDiscountAmount();
+        int discountAmount = BASIC_CHRISTMAS_DISCOUNT_AMOUNT
+                + CHRISTMAS_DISCOUNT_INCREASE * (Integer.parseInt(chosenDateInput) - 1);
+        int paymentAmountAfterDiscount = eventInfoDto.getPaymentDto().getPaymentAmount();
+
+        // then
+        assertThat(christmasDiscountAmount).isEqualTo(discountAmount);
+        assertThat(paymentAmountAfterDiscount).isEqualTo(paymentAmount - discountAmount);
+    }
+
+    @DisplayName("26일 이후의 날짜를 전송하면 크리스마이 디데이 이벤트가 적용되지 않는다.")
+    @ParameterizedTest
+    @CsvSource({"26, 30_000",
+            "27, 10_000",
+            "30, 119_999",
+            "31, 120_000"})
+    void computeEventApplicationWithDateAfterTwentySixth(String chosenDateInput, int paymentAmount) {
+        // given
+        OrderDto orderDto = mock(OrderDto.class);
+        ChosenDateDto chosenDateDto = ChosenDate.from(chosenDateInput).toDto();
+        PaymentDto paymentDto = new PaymentDto(paymentAmount);
+
+        // when
+        EventInfoDto eventInfoDto = eventPlannerService.computeEventApplication(chosenDateDto, orderDto, paymentDto);
+        int christmasDiscountAmount = eventInfoDto.getChristmasDiscountDto().getDiscountDto().getDiscountAmount();
+
+        // then
+        assertThat(christmasDiscountAmount).isEqualTo(0);
     }
 
     private void setOrderInformation(String orderInput, List<String> koreanMenuNames, List<Integer> menuQuantities) {
