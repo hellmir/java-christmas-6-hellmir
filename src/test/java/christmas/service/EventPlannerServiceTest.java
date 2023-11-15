@@ -5,8 +5,7 @@ import christmas.domain.event.ChosenDate;
 import christmas.domain.order.MenuInformation;
 import christmas.domain.order.Order;
 import christmas.domain.order.OrderMenu;
-import christmas.dto.event.ChosenDateDto;
-import christmas.dto.event.EventInfoDto;
+import christmas.dto.event.*;
 import christmas.dto.order.OrderDto;
 import christmas.dto.order.OrderMenuDto;
 import christmas.dto.order.PaymentDto;
@@ -25,6 +24,7 @@ import static christmas.message.ErrorMessage.*;
 import static christmas.testutil.TestConstant.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
+import static org.mockito.Mockito.mock;
 
 class EventPlannerServiceTest {
     private EventPlannerService eventPlannerService = new EventPlannerServiceImpl();
@@ -346,6 +346,23 @@ class EventPlannerServiceTest {
         assertThat(specialDiscountAmount).isEqualTo(SPECIAL_DAY_DISCOUNT_AMOUNT);
         assertThat(paymentAmountAfterDiscount).isEqualTo(paymentAmount - SPECIAL_DAY_DISCOUNT_AMOUNT);
         assertThat(benefitAmount).isEqualTo(SPECIAL_DAY_DISCOUNT_AMOUNT);
+    }
+
+    @DisplayName("총혜택 금액에 따라 배지를 부여한다.")
+    @ParameterizedTest
+    @CsvSource({"SANTA", "TREE", "STAR"})
+    void giveBadge(Badge badge) {
+        // given
+        EventInfoDto eventInfoDto = EventInfoDto.of(mock(PaymentDto.class), mock(GiveawayDto.class),
+                new ChristmasDiscountDto(mock(DiscountDto.class)), new WeekdayDiscountDto(mock(DiscountDto.class)),
+                new WeekendDiscountDto(mock(DiscountDto.class)), new SpecialDiscountDto(mock(DiscountDto.class)),
+                new BenefitDto(badge.getBenefitAmount()), Badge.NONE);
+
+        // when
+        eventInfoDto = eventPlannerService.giveBadge(eventInfoDto);
+
+        // then
+        assertThat(eventInfoDto.getBadge()).isEqualTo(badge);
     }
 
     private void setOrderInformation(String orderInput, List<String> koreanMenuNames, List<Integer> menuQuantities) {
