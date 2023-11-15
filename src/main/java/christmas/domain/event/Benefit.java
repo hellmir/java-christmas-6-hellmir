@@ -4,6 +4,8 @@ import christmas.dto.event.BenefitDto;
 
 import java.util.Objects;
 
+import static christmas.domain.event.Badge.*;
+
 public class Benefit {
     private int benefitAmount;
 
@@ -34,5 +36,23 @@ public class Benefit {
 
     public BenefitDto toDto() {
         return new BenefitDto(benefitAmount);
+    }
+
+    public Badge chooseBadge(Badge badge) {
+        if (badge.isSanta(benefitAmount)) {
+            return SANTA;
+
+        }
+
+        if (badge.isTree(benefitAmount)) {
+            return TREE;
+
+        }
+
+        if (badge.isStar(benefitAmount)) {
+            return STAR;
+        }
+
+        return NONE;
     }
 }

@@ -17,4 +17,20 @@ public enum Badge {
     public boolean isNone() {
         return this == NONE;
     }
+
+    public boolean isSanta(int benefitAmount) {
+        return benefitAmount >= SANTA.benefitAmount;
+    }
+
+    public boolean isTree(int benefitAmount) {
+        return benefitAmount >= TREE.benefitAmount;
+    }
+
+    public boolean isStar(int benefitAmount) {
+        return benefitAmount >= STAR.benefitAmount;
+    }
+
+    public int getBenefitAmount() {
+        return benefitAmount;
+    }
 }

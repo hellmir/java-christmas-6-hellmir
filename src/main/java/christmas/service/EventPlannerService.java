@@ -24,4 +24,6 @@ public interface EventPlannerService {
     EventInfoDto computeDayOfWeekDiscount(EventInfoDto eventInfoDto, ChosenDateDto chosenDateDto, OrderDto orderDto);
 
     EventInfoDto computeSpecialDiscount(EventInfoDto eventInfoDto, ChosenDateDto chosenDateDto);
+
+    EventInfoDto giveBadge(EventInfoDto eventInfoDto);
 }

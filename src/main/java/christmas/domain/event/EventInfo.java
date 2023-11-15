@@ -118,4 +118,8 @@ public class EventInfo {
             specialDiscount = SpecialDiscount.applyDiscount(payment, benefit);
         }
     }
+
+    public void giveBadge() {
+        badge = benefit.chooseBadge(badge);
+    }
 }

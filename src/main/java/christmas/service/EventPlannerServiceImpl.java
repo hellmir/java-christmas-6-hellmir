@@ -91,6 +91,15 @@ public class EventPlannerServiceImpl implements EventPlannerService {
         return eventInfo.toDto();
     }
 
+    @Override
+    public EventInfoDto giveBadge(EventInfoDto eventInfoDto) {
+        EventInfo eventInfo = EventInfo.from(eventInfoDto);
+
+        eventInfo.giveBadge();
+
+        return eventInfo.toDto();
+    }
+
     private String[] parseOrderInput(String orderInput) {
         return orderInput.split(",");
     }

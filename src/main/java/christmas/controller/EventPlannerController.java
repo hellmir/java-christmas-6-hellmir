@@ -62,6 +62,7 @@ public class EventPlannerController {
         eventInfoDto = eventPlannerService.computeChristmasDiscountApplication(eventInfoDto, chosenDateDto);
         eventInfoDto = eventPlannerService.computeDayOfWeekDiscount(eventInfoDto, chosenDateDto, orderDto);
         eventInfoDto = eventPlannerService.computeSpecialDiscount(eventInfoDto, chosenDateDto);
+        eventInfoDto = eventPlannerService.giveBadge(eventInfoDto);
 
         return eventInfoDto;
     }
