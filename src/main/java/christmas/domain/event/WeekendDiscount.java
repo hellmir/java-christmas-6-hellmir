@@ -2,6 +2,8 @@ package christmas.domain.event;
 
 import christmas.dto.event.WeekendDiscountDto;
 
+import java.util.Objects;
+
 public class WeekendDiscount {
     private final Discount discount;
 
@@ -11,6 +13,19 @@ public class WeekendDiscount {
 
     public WeekendDiscount(Discount discount) {
         this.discount = discount;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        WeekendDiscount that = (WeekendDiscount) o;
+        return Objects.equals(discount, that.discount);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(discount);
     }
 
     public WeekendDiscountDto toDto() {
