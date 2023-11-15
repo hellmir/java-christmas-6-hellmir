@@ -1,9 +1,9 @@
 package christmas.controller;
 
 import christmas.domain.event.EventInfo;
-import christmas.dto.ChosenDateDto;
-import christmas.dto.OrderDto;
-import christmas.dto.PaymentDto;
+import christmas.dto.event.ChosenDateDto;
+import christmas.dto.order.OrderDto;
+import christmas.dto.order.PaymentDto;
 import christmas.service.EventPlannerService;
 import christmas.service.EventPlannerServiceImpl;
 import christmas.view.InputView;

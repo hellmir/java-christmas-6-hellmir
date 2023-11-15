@@ -1,4 +1,4 @@
-package christmas.dto;
+package christmas.dto.order;
 
 import java.util.List;
 

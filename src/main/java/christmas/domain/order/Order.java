@@ -1,7 +1,7 @@
 package christmas.domain.order;
 
-import christmas.dto.OrderDto;
-import christmas.dto.OrderMenuDto;
+import christmas.dto.order.OrderDto;
+import christmas.dto.order.OrderMenuDto;
 import christmas.validation.InputFormatValidator;
 
 import java.util.ArrayList;

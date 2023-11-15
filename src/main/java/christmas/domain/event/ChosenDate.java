@@ -1,6 +1,6 @@
 package christmas.domain.event;
 
-import christmas.dto.ChosenDateDto;
+import christmas.dto.event.ChosenDateDto;
 import christmas.validation.InputFormatValidator;
 
 import java.util.Objects;

@@ -2,10 +2,10 @@ package christmas.service;
 
 import christmas.domain.order.Order;
 import christmas.domain.order.OrderMenu;
-import christmas.dto.ChosenDateDto;
-import christmas.dto.OrderDto;
-import christmas.dto.OrderMenuDto;
-import christmas.dto.PaymentDto;
+import christmas.dto.event.ChosenDateDto;
+import christmas.dto.order.OrderDto;
+import christmas.dto.order.OrderMenuDto;
+import christmas.dto.order.PaymentDto;
 import christmas.testutil.TestObjectFactory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

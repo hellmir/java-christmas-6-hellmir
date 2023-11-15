@@ -1,8 +1,8 @@
 package christmas.view;
 
-import christmas.dto.OrderDto;
-import christmas.dto.OrderMenuDto;
-import christmas.dto.PaymentDto;
+import christmas.dto.order.OrderDto;
+import christmas.dto.order.OrderMenuDto;
+import christmas.dto.order.PaymentDto;
 import christmas.utility.FormatConverter;
 
 public class PrintHandler {

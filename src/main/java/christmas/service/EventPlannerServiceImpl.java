@@ -4,9 +4,9 @@ import christmas.domain.event.ChosenDate;
 import christmas.domain.event.EventInfo;
 import christmas.domain.order.Order;
 import christmas.domain.order.Payment;
-import christmas.dto.ChosenDateDto;
-import christmas.dto.OrderDto;
-import christmas.dto.PaymentDto;
+import christmas.dto.event.ChosenDateDto;
+import christmas.dto.order.OrderDto;
+import christmas.dto.order.PaymentDto;
 
 public class EventPlannerServiceImpl implements EventPlannerService {
     @Override

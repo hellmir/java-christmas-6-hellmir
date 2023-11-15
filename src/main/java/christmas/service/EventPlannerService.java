@@ -1,9 +1,9 @@
 package christmas.service;
 
 import christmas.domain.event.EventInfo;
-import christmas.dto.ChosenDateDto;
-import christmas.dto.OrderDto;
-import christmas.dto.PaymentDto;
+import christmas.dto.event.ChosenDateDto;
+import christmas.dto.order.OrderDto;
+import christmas.dto.order.PaymentDto;
 
 public interface EventPlannerService {
     ChosenDateDto parseChosenDate(String chosenDateInput);

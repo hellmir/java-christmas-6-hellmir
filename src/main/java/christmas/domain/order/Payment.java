@@ -1,6 +1,6 @@
 package christmas.domain.order;
 
-import christmas.dto.PaymentDto;
+import christmas.dto.order.PaymentDto;
 
 import java.util.Objects;
 

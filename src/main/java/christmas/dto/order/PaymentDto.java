@@ -1,4 +1,4 @@
-package christmas.dto;
+package christmas.dto.order;
 
 public class PaymentDto {
     private int paymentAmount;

@@ -1,4 +1,4 @@
-package christmas.dto;
+package christmas.dto.event;
 
 public class ChosenDateDto {
     private final int chosenDate;

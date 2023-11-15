@@ -1,7 +1,7 @@
 package christmas.view;
 
-import christmas.dto.ChosenDateDto;
-import christmas.dto.OrderMenuDto;
+import christmas.dto.event.ChosenDateDto;
+import christmas.dto.order.OrderMenuDto;
 
 import static christmas.message.InfoMessage.*;
 

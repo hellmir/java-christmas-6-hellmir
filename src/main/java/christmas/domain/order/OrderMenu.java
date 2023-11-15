@@ -1,6 +1,6 @@
 package christmas.domain.order;
 
-import christmas.dto.OrderMenuDto;
+import christmas.dto.order.OrderMenuDto;
 
 public class OrderMenu {
     private final MenuInformation menuInformation;
