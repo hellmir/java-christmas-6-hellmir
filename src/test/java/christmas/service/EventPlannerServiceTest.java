@@ -201,9 +201,11 @@ class EventPlannerServiceTest {
         // when
         eventInfoDto = eventPlannerService.computeGiveawayApplication(eventInfoDto, paymentDto);
         MenuInformation giveaway = eventInfoDto.getGiveawayDto().getGiveaway();
+        int benefitAmount = eventInfoDto.getBenefitDto().getBenefitAmount();
 
         // then
         assertThat(giveaway).isEqualTo(CHAMPAGNE);
+        assertThat(benefitAmount).isEqualTo(CHAMPAGNE.getPrice());
     }
 
     @DisplayName("할인 전 총주문금액이 120,000원 미만이면 증정품을 반환하지 않는다.")
@@ -217,9 +219,11 @@ class EventPlannerServiceTest {
         // when
         eventInfoDto = eventPlannerService.computeGiveawayApplication(eventInfoDto, paymentDto);
         MenuInformation giveaway = eventInfoDto.getGiveawayDto().getGiveaway();
+        int benefitAmount = eventInfoDto.getBenefitDto().getBenefitAmount();
 
         // then
         assertThat(giveaway.isNone()).isTrue();
+        assertThat(benefitAmount).isEqualTo(0);
     }
 
     @DisplayName("25일 이전의 날짜와 할인 가능한 예상 결제 금액을 전송하면 크리스마스 디데이 이벤트가 적용된다.")
@@ -239,10 +243,12 @@ class EventPlannerServiceTest {
         eventInfoDto = eventPlannerService.computeChristmasDiscountApplication(eventInfoDto, chosenDateDto);
         int christmasDiscountAmount = eventInfoDto.getChristmasDiscountDto().getDiscountDto().getDiscountAmount();
         int paymentAmountAfterDiscount = eventInfoDto.getPaymentDto().getPaymentAmount();
+        int benefitAmount = eventInfoDto.getBenefitDto().getBenefitAmount();
 
         // then
         assertThat(christmasDiscountAmount).isEqualTo(discountAmount);
         assertThat(paymentAmountAfterDiscount).isEqualTo(paymentAmount - discountAmount);
+        assertThat(benefitAmount).isEqualTo(discountAmount);
     }
 
     @DisplayName("26일 이후의 날짜를 전송하면 크리스마스 디데이 이벤트가 적용되지 않는다.")
@@ -259,9 +265,13 @@ class EventPlannerServiceTest {
         // when
         eventInfoDto = eventPlannerService.computeChristmasDiscountApplication(eventInfoDto, chosenDateDto);
         int christmasDiscountAmount = eventInfoDto.getChristmasDiscountDto().getDiscountDto().getDiscountAmount();
+        int paymentAmountAfterDiscount = eventInfoDto.getPaymentDto().getPaymentAmount();
+        int benefitAmount = eventInfoDto.getBenefitDto().getBenefitAmount();
 
         // then
         assertThat(christmasDiscountAmount).isEqualTo(0);
+        assertThat(paymentAmountAfterDiscount).isEqualTo(paymentAmount);
+        assertThat(benefitAmount).isEqualTo(0);
     }
 
     @DisplayName("전송된 날짜가 평일이면 디저트를 정해진 가격만큼 할인한다.")
@@ -282,11 +292,11 @@ class EventPlannerServiceTest {
         // when
         eventInfoDto = eventPlannerService.computeDayOfWeekDiscount(eventInfoDto, chosenDateDto, orderDto);
         int weekdayDiscountAmount = eventInfoDto.getWeekdayDiscountDto().getDiscountDto().getDiscountAmount();
-        int paymentAmountAfterDiscount = eventInfoDto.getPaymentDto().getPaymentAmount();
 
         // then
         assertThat(weekdayDiscountAmount).isEqualTo(discountAmount);
-        assertThat(paymentAmountAfterDiscount).isEqualTo(paymentAmount - discountAmount);
+        assertThat(eventInfoDto.getPaymentDto().getPaymentAmount()).isEqualTo(paymentAmount - discountAmount);
+        assertThat(eventInfoDto.getBenefitDto().getBenefitAmount()).isEqualTo(discountAmount);
     }
 
     @DisplayName("전송된 날짜가 주말이면 메인 메뉴를 정해진 가격만큼 할인한다.")
@@ -307,11 +317,11 @@ class EventPlannerServiceTest {
         // when
         eventInfoDto = eventPlannerService.computeDayOfWeekDiscount(eventInfoDto, chosenDateDto, orderDto);
         int weekendDiscountAmount = eventInfoDto.getWeekendDiscountDto().getDiscountDto().getDiscountAmount();
-        int paymentAmountAfterDiscount = eventInfoDto.getPaymentDto().getPaymentAmount();
 
         // then
         assertThat(weekendDiscountAmount).isEqualTo(discountAmount);
-        assertThat(paymentAmountAfterDiscount).isEqualTo(paymentAmount - discountAmount);
+        assertThat(eventInfoDto.getPaymentDto().getPaymentAmount()).isEqualTo(paymentAmount - discountAmount);
+        assertThat(eventInfoDto.getBenefitDto().getBenefitAmount()).isEqualTo(discountAmount);
     }
 
     @DisplayName("이벤트 달력에 별이 있는 날짜를 전송하면 1,000원 할인한다.")
@@ -330,10 +340,12 @@ class EventPlannerServiceTest {
         eventInfoDto = eventPlannerService.computeSpecialDiscount(eventInfoDto, chosenDateDto);
         int specialDiscountAmount = eventInfoDto.getSpecialDiscountDto().getDiscountDto().getDiscountAmount();
         int paymentAmountAfterDiscount = eventInfoDto.getPaymentDto().getPaymentAmount();
+        int benefitAmount = eventInfoDto.getBenefitDto().getBenefitAmount();
 
         // then
         assertThat(specialDiscountAmount).isEqualTo(SPECIAL_DAY_DISCOUNT_AMOUNT);
         assertThat(paymentAmountAfterDiscount).isEqualTo(paymentAmount - SPECIAL_DAY_DISCOUNT_AMOUNT);
+        assertThat(benefitAmount).isEqualTo(SPECIAL_DAY_DISCOUNT_AMOUNT);
     }
 
     private void setOrderInformation(String orderInput, List<String> koreanMenuNames, List<Integer> menuQuantities) {
