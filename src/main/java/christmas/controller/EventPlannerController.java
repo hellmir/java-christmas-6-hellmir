@@ -25,6 +25,7 @@ public class EventPlannerController {
         PrintHandler.printTotalOrderPrice(paymentDto);
 
         EventInfoDto eventInfoDto = computeEventApplications(chosenDateDto, orderDto, paymentDto);
+        PrintHandler.printResultMessages(eventInfoDto);
     }
 
     private static ChosenDateDto receiveDateInput() {

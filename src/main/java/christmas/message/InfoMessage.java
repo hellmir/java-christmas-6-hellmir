@@ -17,4 +17,6 @@ public class InfoMessage {
     public static final String SECOND_RESULT_MESSAGE_HEAD = "일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!";
     public static final String ORDER_MENUS_MESSAGE_HEAD = "<주문 메뉴>";
     public static final String TOTAL_ORDER_PRICE_MESSAGE_HEAD = "<할인 전 총주문 금액>";
+    public static final String GIVEAWAY_MESSAGE_HEAD = "<증정 메뉴>";
+    public static final String NONE = "없음";
 }

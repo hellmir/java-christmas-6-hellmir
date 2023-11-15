@@ -1,5 +1,6 @@
 package christmas.view;
 
+import christmas.domain.order.MenuInformation;
 import christmas.dto.event.ChosenDateDto;
 import christmas.dto.order.OrderMenuDto;
 
@@ -11,7 +12,7 @@ public class OutputView {
     }
 
     public static void printMessage(String message) {
-        System.out.println(message);
+        System.out.println(message + "\n");
     }
 
     public static void printStartingInfoMessage() {
@@ -34,5 +35,17 @@ public class OutputView {
 
     public static void printTotalOrderPriceHead() {
         System.out.println(TOTAL_ORDER_PRICE_MESSAGE_HEAD);
+    }
+
+    public static void printGiveawayMessageHead() {
+        System.out.println(GIVEAWAY_MESSAGE_HEAD);
+    }
+
+    public static void printNoneMessage() {
+        System.out.println(NONE);
+    }
+
+    public static void printGiveawayMessage(MenuInformation giveaway) {
+        System.out.println(giveaway.getKoreanName() + " 1개\n");
     }
 }

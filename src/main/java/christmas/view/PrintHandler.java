@@ -1,5 +1,7 @@
 package christmas.view;
 
+import christmas.domain.order.MenuInformation;
+import christmas.dto.event.EventInfoDto;
 import christmas.dto.order.OrderDto;
 import christmas.dto.order.OrderMenuDto;
 import christmas.dto.order.PaymentDto;
@@ -20,5 +22,22 @@ public class PrintHandler {
         OutputView.printTotalOrderPriceHead();
         String paymentToPrint = FormatConverter.convertMoneyFormatForView(paymentDto.getPaymentAmount());
         OutputView.printMessage(paymentToPrint);
+    }
+
+    public static void printResultMessages(EventInfoDto eventInfoDto) {
+        printGiveawayMessage(eventInfoDto);
+        printBenefitListMessage(eventInfoDto);
+    }
+
+    private static void printGiveawayMessage(EventInfoDto eventInfoDto) {
+        OutputView.printGiveawayMessageHead();
+        MenuInformation giveaway = eventInfoDto.getGiveawayDto().getGiveaway();
+
+        if (giveaway.isNone()) {
+            OutputView.printNoneMessage();
+            return;
+        }
+
+        OutputView.printGiveawayMessage(eventInfoDto.getGiveawayDto().getGiveaway());
     }
 }
