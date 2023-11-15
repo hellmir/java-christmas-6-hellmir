@@ -89,29 +89,25 @@ public class EventInfo {
     }
 
     public void updateChristmasDiscount(ChosenDate chosenDate) {
-        christmasDiscount = ChristmasDiscount.from(chosenDate);
-        payment.updateDiscountAmount(christmasDiscount);
+        christmasDiscount = ChristmasDiscount.applyDiscount(chosenDate, payment);
     }
 
     public void updateDayOfWeekDiscount(ChosenDate chosenDate, Order order) {
         boolean isWeekday = chosenDate.isWeekday();
 
         if (isWeekday) {
-            weekdayDiscount = WeekdayDiscount.from(order);
-            payment.updateDiscountAmount(weekdayDiscount);
+            weekdayDiscount = WeekdayDiscount.applyDiscount(order, payment);
             return;
         }
 
-        weekendDiscount = WeekendDiscount.from(order);
-        payment.updateDiscountAmount(weekendDiscount);
+        weekendDiscount = WeekendDiscount.applyDiscount(order, payment);
     }
 
     public void updateSpecialDiscount(ChosenDate chosenDate) {
         boolean isSpecialDay = chosenDate.isSpecialDay();
 
         if (isSpecialDay) {
-            specialDiscount = SpecialDiscount.updateDiscount();
-            payment.updateDiscountAmount(specialDiscount);
+            specialDiscount = SpecialDiscount.applyDiscount(payment);
         }
     }
 }

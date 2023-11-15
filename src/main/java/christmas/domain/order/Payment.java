@@ -1,9 +1,5 @@
 package christmas.domain.order;
 
-import christmas.domain.event.ChristmasDiscount;
-import christmas.domain.event.SpecialDiscount;
-import christmas.domain.event.WeekdayDiscount;
-import christmas.domain.event.WeekendDiscount;
 import christmas.dto.order.PaymentDto;
 
 import java.util.Objects;
@@ -50,23 +46,8 @@ public class Payment {
         return paymentAmount >= GIVEAWAY_APPLIED_AMOUNT;
     }
 
-    public void updateDiscountAmount(ChristmasDiscount christmasDiscount) {
-        paymentAmount = christmasDiscount.reducePaymentAmount(paymentAmount);
-        validate(paymentAmount);
-    }
-
-    public void updateDiscountAmount(WeekdayDiscount weekdayDiscount) {
-        paymentAmount = weekdayDiscount.reducePaymentAmount(paymentAmount);
-        validate(paymentAmount);
-    }
-
-    public void updateDiscountAmount(WeekendDiscount weekendDiscount) {
-        paymentAmount = weekendDiscount.reducePaymentAmount(paymentAmount);
-        validate(paymentAmount);
-    }
-
-    public void updateDiscountAmount(SpecialDiscount specialDiscount) {
-        paymentAmount = specialDiscount.reducePaymentAmount(paymentAmount);
+    public void updateDiscountAmount(int discountAmount) {
+        paymentAmount -= discountAmount;
         validate(paymentAmount);
     }
 

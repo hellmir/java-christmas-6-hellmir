@@ -1,6 +1,7 @@
 package christmas.domain.event;
 
 import christmas.domain.order.Order;
+import christmas.domain.order.Payment;
 import christmas.dto.event.WeekendDiscountDto;
 
 import java.util.Objects;
@@ -21,8 +22,9 @@ public class WeekendDiscount {
         return new WeekendDiscount(discount);
     }
 
-    public static WeekendDiscount from(Order order) {
+    public static WeekendDiscount applyDiscount(Order order, Payment payment) {
         Discount discount = order.computeMainDiscount();
+        discount.updateDiscountChange(payment);
         return new WeekendDiscount(discount);
     }
 
@@ -41,10 +43,5 @@ public class WeekendDiscount {
 
     public WeekendDiscountDto toDto() {
         return new WeekendDiscountDto(discount.toDto());
-    }
-
-    public int reducePaymentAmount(int paymentAmount) {
-        return discount.reducePaymentAmount(paymentAmount);
-
     }
 }

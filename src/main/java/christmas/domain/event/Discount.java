@@ -1,5 +1,6 @@
 package christmas.domain.event;
 
+import christmas.domain.order.Payment;
 import christmas.dto.event.DiscountDto;
 
 import java.util.Objects;
@@ -36,8 +37,8 @@ public class Discount {
         return new DiscountDto(discountAmount);
     }
 
-    public int reducePaymentAmount(int paymentAmount) {
-        return paymentAmount - discountAmount;
+    public int reducePaymentAmount() {
+        return discountAmount;
     }
 
     private void validate(int discountAmount) {
@@ -46,5 +47,9 @@ public class Discount {
                     ERROR_MESSAGE_HEAD + DISCOUNT_AMOUNT_UNDER_ZERO_EXCEPTION + discountAmount
             );
         }
+    }
+
+    public void updateDiscountChange(Payment payment) {
+        payment.updateDiscountAmount(discountAmount);
     }
 }

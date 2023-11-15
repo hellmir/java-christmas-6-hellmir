@@ -1,5 +1,6 @@
 package christmas.domain.event;
 
+import christmas.domain.order.Payment;
 import christmas.dto.event.SpecialDiscountDto;
 
 import java.util.Objects;
@@ -39,12 +40,9 @@ public class SpecialDiscount {
         return new SpecialDiscountDto(discount.toDto());
     }
 
-    public static SpecialDiscount updateDiscount() {
+    public static SpecialDiscount applyDiscount(Payment payment) {
         Discount discount = new Discount(SPECIAL_DAY_DISCOUNT_AMOUNT);
+        discount.updateDiscountChange(payment);
         return new SpecialDiscount(discount);
-    }
-
-    public int reducePaymentAmount(int paymentAmount) {
-        return discount.reducePaymentAmount(paymentAmount);
     }
 }
