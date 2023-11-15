@@ -2,10 +2,14 @@ package christmas.domain.event;
 
 import java.util.Objects;
 
+import static christmas.message.ErrorMessage.DISCOUNT_AMOUNT_UNDER_ZERO_EXCEPTION;
+import static christmas.message.ErrorMessage.ERROR_MESSAGE_HEAD;
+
 public class Discount {
     private final int discountAmount;
 
     public Discount(int discountAmount) {
+        validate(discountAmount);
         this.discountAmount = discountAmount;
     }
 
@@ -24,5 +28,13 @@ public class Discount {
 
     public int reducePaymentAmount(int paymentAmount) {
         return paymentAmount - discountAmount;
+    }
+
+    private void validate(int discountAmount) {
+        if (discountAmount < 0) {
+            throw new IllegalArgumentException(
+                    ERROR_MESSAGE_HEAD + DISCOUNT_AMOUNT_UNDER_ZERO_EXCEPTION + discountAmount
+            );
+        }
     }
 }
