@@ -2,7 +2,6 @@ package christmas.service;
 
 import christmas.domain.event.Badge;
 import christmas.domain.event.ChosenDate;
-import christmas.domain.event.EventInfo;
 import christmas.domain.order.MenuInformation;
 import christmas.domain.order.Order;
 import christmas.domain.order.OrderMenu;

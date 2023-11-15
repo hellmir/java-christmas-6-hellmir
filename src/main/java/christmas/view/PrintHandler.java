@@ -18,7 +18,7 @@ public class PrintHandler {
 
     public static void printTotalOrderPrice(PaymentDto paymentDto) {
         OutputView.printTotalOrderPriceHead();
-        String paymentToPrint = FormatConverter.convertMoneyFormatForView(paymentDto.getPayment());
+        String paymentToPrint = FormatConverter.convertMoneyFormatForView(paymentDto.getPaymentAmount());
         OutputView.printMessage(paymentToPrint);
     }
 }

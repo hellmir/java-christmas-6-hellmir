@@ -49,6 +49,7 @@ public class ChosenDate {
         if (chosenDate > 25) {
             return new Discount(0);
         }
+
         int basicDiscountAmount = BASIC_CHRISTMAS_DISCOUNT_AMOUNT;
         int increasedDiscountAmount = CHRISTMAS_DISCOUNT_INCREASE * (chosenDate - 1);
         return new Discount(basicDiscountAmount + increasedDiscountAmount);
