@@ -1,6 +1,7 @@
 package christmas.domain.event;
 
 import christmas.domain.order.MenuInformation;
+import christmas.domain.order.Order;
 import christmas.domain.order.Payment;
 import christmas.dto.event.*;
 import christmas.dto.order.PaymentDto;
@@ -85,5 +86,13 @@ public class EventInfo {
         payment.updateDiscountAmount(christmasDiscount);
     }
 
+    public void updateDayOfWeekDiscount(ChosenDate chosenDate, Order order) {
+        boolean isWeekday = chosenDate.isWeekday();
+
+        if (isWeekday) {
+            weekdayDiscount = WeekdayDiscount.from(order);
+            payment.updateDiscountAmount(weekdayDiscount);
+            return;
+        }
     }
 }

@@ -38,4 +38,8 @@ public class OrderMenu {
     public int computeMenuPrice() {
         return menuInformation.getPrice() * menuQuantity;
     }
+
+    public boolean isDessert() {
+        return menuInformation.isDessert();
+    }
 }

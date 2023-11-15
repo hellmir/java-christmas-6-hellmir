@@ -1,5 +1,6 @@
 package christmas.domain.order;
 
+import christmas.domain.event.Discount;
 import christmas.dto.order.OrderDto;
 import christmas.dto.order.OrderMenuDto;
 import christmas.validation.InputFormatValidator;
@@ -8,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import static christmas.configuration.EventConfig.WEEKDAY_DISCOUNT_AMOUNT;
 import static christmas.configuration.OrderConfig.MAX_MENU_QUANTITY;
 import static christmas.message.ErrorMessage.*;
 
@@ -96,6 +98,18 @@ public class Order {
         }
 
         return totalPrice;
+    }
+
+    public Discount computeDessertDiscount() {
+        int dessertQuantity = 0;
+
+        for (OrderMenu orderMenu : orderMenus) {
+            if (orderMenu.isDessert()) {
+                ++dessertQuantity;
+            }
+        }
+
+        return new Discount(dessertQuantity * WEEKDAY_DISCOUNT_AMOUNT);
     }
 
     private void validateTotalMenuQuantity() {

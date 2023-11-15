@@ -20,4 +20,6 @@ public interface EventPlannerService {
     EventInfoDto computeGiveawayApplication(EventInfoDto eventInfoDto, PaymentDto paymentDto);
 
     EventInfoDto computeChristmasDiscountApplication(EventInfoDto eventInfoDto, ChosenDateDto chosenDateDto);
+
+    EventInfoDto computeDayOfWeekDiscount(EventInfoDto eventInfoDto, ChosenDateDto chosenDateDto, OrderDto orderDto);
 }

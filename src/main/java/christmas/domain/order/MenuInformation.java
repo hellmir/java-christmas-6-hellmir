@@ -25,6 +25,10 @@ public enum MenuInformation {
         this.price = price;
     }
 
+    public boolean isDessert() {
+        return classification.equals("디저트");
+    }
+
     public boolean isBeverage() {
         return classification.equals("음료");
     }

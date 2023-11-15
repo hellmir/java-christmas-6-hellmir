@@ -1,6 +1,7 @@
 package christmas.domain.order;
 
 import christmas.domain.event.ChristmasDiscount;
+import christmas.domain.event.WeekdayDiscount;
 import christmas.dto.order.PaymentDto;
 
 import java.util.Objects;
@@ -49,6 +50,11 @@ public class Payment {
 
     public void updateDiscountAmount(ChristmasDiscount christmasDiscount) {
         paymentAmount = christmasDiscount.reducePaymentAmount(paymentAmount);
+        validate(paymentAmount);
+    }
+
+    public void updateDiscountAmount(WeekdayDiscount weekdayDiscount) {
+        paymentAmount = weekdayDiscount.reducePaymentAmount(paymentAmount);
         validate(paymentAmount);
     }
 

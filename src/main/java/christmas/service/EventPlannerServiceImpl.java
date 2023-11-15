@@ -69,6 +69,18 @@ public class EventPlannerServiceImpl implements EventPlannerService {
         return eventInfo.toDto();
     }
 
+    @Override
+    public EventInfoDto computeDayOfWeekDiscount
+            (EventInfoDto eventInfoDto, ChosenDateDto chosenDateDto, OrderDto orderDto) {
+        EventInfo eventInfo = EventInfo.from(eventInfoDto);
+        ChosenDate chosenDate = ChosenDate.from(chosenDateDto);
+        Order order = Order.from(orderDto);
+
+        eventInfo.updateDayOfWeekDiscount(chosenDate, order);
+
+        return eventInfo.toDto();
+    }
+
     private String[] parseOrderInput(String orderInput) {
         return orderInput.split(",");
     }
