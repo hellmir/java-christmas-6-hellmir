@@ -6,4 +6,8 @@ public class ChristmasDiscountDto {
     public ChristmasDiscountDto(DiscountDto discountDto) {
         this.discountDto = discountDto;
     }
+
+    public DiscountDto getDiscountDto() {
+        return discountDto;
+    }
 }

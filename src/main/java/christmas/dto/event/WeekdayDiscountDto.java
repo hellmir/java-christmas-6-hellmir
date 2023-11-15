@@ -6,4 +6,8 @@ public class WeekdayDiscountDto {
     public WeekdayDiscountDto(DiscountDto discountDto) {
         this.discountDto = discountDto;
     }
+
+    public DiscountDto getDiscountDto() {
+        return discountDto;
+    }
 }

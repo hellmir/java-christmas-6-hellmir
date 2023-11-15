@@ -6,4 +6,8 @@ public class DiscountDto {
     public DiscountDto(int discountAmount) {
         this.discountAmount = discountAmount;
     }
+
+    public int getDiscountAmount() {
+        return discountAmount;
+    }
 }

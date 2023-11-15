@@ -1,5 +1,7 @@
 package christmas.service;
 
+import christmas.domain.event.Badge;
+import christmas.domain.order.MenuInformation;
 import christmas.domain.order.Order;
 import christmas.domain.order.OrderMenu;
 import christmas.dto.event.ChosenDateDto;
@@ -16,10 +18,12 @@ import org.junit.jupiter.params.provider.CsvSource;
 import java.util.ArrayList;
 import java.util.List;
 
+import static christmas.domain.order.MenuInformation.CHAMPAGNE;
 import static christmas.message.ErrorMessage.*;
 import static christmas.testutil.TestConstant.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
+import static org.mockito.Mockito.mock;
 
 class EventPlannerServiceTest {
     private EventPlannerService eventPlannerService = new EventPlannerServiceImpl();
@@ -164,7 +168,7 @@ class EventPlannerServiceTest {
         assertThat(paymentDto.getPaymentAmount()).isEqualTo(menuPrice1 + menuPrice2 + menuPrice3 + menuPrice4);
     }
 
-    @DisplayName("총주문금액이 10,000원 미만이면 이벤트 객체를 반환하지 않는다.")
+    @DisplayName("총주문금액이 10,000원 미만이면 이벤트가 적용되지 않는다.")
     @ParameterizedTest
     @CsvSource({"1", "1_000", "9_999"})
     void computeEventApplicationWithUnderEventAppliedAmount(int paymentAmount) {
@@ -175,14 +179,35 @@ class EventPlannerServiceTest {
 
         // when
         EventInfoDto eventInfoDto = eventPlannerService.computeEventApplication(chosenDateDto, orderDto, paymentDto);
+        MenuInformation giveaway = eventInfoDto.getGiveawayDto().getGiveaway();
+        int christmasDiscountAmount = eventInfoDto.getChristmasDiscountDto().getDiscountDto().getDiscountAmount();
+        int weekdayDiscountAmount = eventInfoDto.getWeekdayDiscountDto().getDiscountDto().getDiscountAmount();
+        int weekendDiscountAmount = eventInfoDto.getWeekendDiscountDto().getDiscountDto().getDiscountAmount();
+        Badge badge = eventInfoDto.getBadge();
 
         // then
-        assertThat(eventInfoDto.getGiveawayDto()).isEqualTo(null);
-        assertThat(eventInfoDto.getChristmasDiscountDto()).isEqualTo(null);
-        assertThat(eventInfoDto.getWeekdayDiscountDto()).isEqualTo(null);
-        assertThat(eventInfoDto.getWeekendDiscountDto()).isEqualTo(null);
-        assertThat(eventInfoDto.getBadge()).isEqualTo(null);
+        assertThat(giveaway.isNone()).isTrue();
+        assertThat(christmasDiscountAmount).isEqualTo(0);
+        assertThat(weekdayDiscountAmount).isEqualTo(0);
+        assertThat(weekendDiscountAmount).isEqualTo(0);
+        assertThat(badge.isNone()).isTrue();
     }
+
+    @DisplayName("할인 전 총주문금액이 120,000원 이상이면 증정품으로 샴페인을 반환한다.")
+    @ParameterizedTest
+    @CsvSource({"120_000", "200_000", "1_000_000"})
+    void computeEventApplicationWithGiveawayAppliedAmountOrMore(int paymentAmount) {
+        // given
+        ChosenDateDto chosenDateDto = mock(ChosenDateDto.class);
+        OrderDto orderDto = mock(OrderDto.class);
+        PaymentDto paymentDto = new PaymentDto(paymentAmount);
+
+        // when
+        EventInfoDto eventInfoDto = eventPlannerService.computeEventApplication(chosenDateDto, orderDto, paymentDto);
+        MenuInformation giveaway = eventInfoDto.getGiveawayDto().getGiveaway();
+
+        // then
+        assertThat(giveaway).isEqualTo(CHAMPAGNE);
     }
 
     private void setOrderInformation(String orderInput, List<String> koreanMenuNames, List<Integer> menuQuantities) {

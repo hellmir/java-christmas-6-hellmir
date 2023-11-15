@@ -1,5 +1,6 @@
 package christmas.domain.event;
 
+import christmas.domain.order.MenuInformation;
 import christmas.domain.order.Payment;
 import christmas.dto.event.*;
 
@@ -13,6 +14,14 @@ public class EventInfo {
     private WeekdayDiscount weekdayDiscount;
     private WeekendDiscount weekendDiscount;
     private Badge badge;
+
+    public EventInfo() {
+        giveaway = new Giveaway(MenuInformation.NONE);
+        christmasDiscount = new ChristmasDiscount();
+        weekdayDiscount = new WeekdayDiscount();
+        weekendDiscount = new WeekendDiscount();
+        badge = Badge.NONE;
+    }
 
     @Override
     public boolean equals(Object o) {

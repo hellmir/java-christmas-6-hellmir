@@ -3,13 +3,13 @@ package christmas.dto.event;
 import christmas.domain.order.MenuInformation;
 
 public class GiveawayDto {
-    private final MenuInformation menuInformation;
+    private final MenuInformation giveaway;
 
-    public GiveawayDto(MenuInformation menuInformation) {
-        this.menuInformation = menuInformation;
+    public GiveawayDto(MenuInformation giveaway) {
+        this.giveaway = giveaway;
     }
 
-    public MenuInformation getMenuInformation() {
-        return menuInformation;
+    public MenuInformation getGiveaway() {
+        return giveaway;
     }
 }

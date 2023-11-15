@@ -44,7 +44,7 @@ public class EventPlannerServiceImpl implements EventPlannerService {
         Payment payment = Payment.from(paymentDto);
         EventInfo eventInfo = new EventInfo();
         if (!payment.isEventApplied()) {
-            return new EventInfoDto();
+            return eventInfo.toDto();
         }
 
         eventInfo.updateGiveawayApplication(payment);

@@ -1,6 +1,7 @@
 package christmas.domain.order;
 
 public enum MenuInformation {
+    NONE("없음", "없음", 0),
     BUTTON_MUSHROOM_SOUP("양송이수프", "에피타이저", 6_000),
     TAPAS("타파스", "에피타이저", 5_500),
     CAESAR_SALAD("시저샐러드", "에피타이저", 8_000),
@@ -34,5 +35,9 @@ public enum MenuInformation {
 
     public int getPrice() {
         return price;
+    }
+
+    public boolean isNone() {
+        return this == NONE;
     }
 }

@@ -9,14 +9,6 @@ public class EventInfoDto {
     private final WeekendDiscountDto weekendDiscountDto;
     private final Badge badge;
 
-    public EventInfoDto() {
-        giveawayDto = null;
-        christmasDiscountDto = null;
-        weekdayDiscountDto = null;
-        weekendDiscountDto = null;
-        badge = null;
-    }
-
     private EventInfoDto(GiveawayDto giveawayDto, ChristmasDiscountDto christmasDiscountDto,
                          WeekdayDiscountDto weekdayDiscountDto,
                          WeekendDiscountDto weekendDiscountDto, Badge badge) {

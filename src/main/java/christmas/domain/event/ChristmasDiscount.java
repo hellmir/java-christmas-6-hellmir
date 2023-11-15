@@ -7,6 +7,10 @@ import java.util.Objects;
 public class ChristmasDiscount {
     private final Discount discount;
 
+    public ChristmasDiscount() {
+        discount = new Discount(0);
+    }
+
     private ChristmasDiscount(Discount discount) {
         this.discount = discount;
     }
