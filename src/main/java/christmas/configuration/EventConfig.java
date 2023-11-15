@@ -13,4 +13,5 @@ public class EventConfig {
     public static final int CHRISTMAS_DISCOUNT_INCREASE = 100;
     public static final int WEEKDAY_DISCOUNT_AMOUNT = YEAR;
     public static final int WEEKEND_DISCOUNT_AMOUNT = YEAR;
+    public static final int SPECIAL_DAY_DISCOUNT_AMOUNT = 1_000;
 }

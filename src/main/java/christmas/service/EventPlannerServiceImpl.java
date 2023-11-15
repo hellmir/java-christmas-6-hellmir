@@ -81,6 +81,16 @@ public class EventPlannerServiceImpl implements EventPlannerService {
         return eventInfo.toDto();
     }
 
+    @Override
+    public EventInfoDto computeSpecialDiscount(EventInfoDto eventInfoDto, ChosenDateDto chosenDateDto) {
+        EventInfo eventInfo = EventInfo.from(eventInfoDto);
+        ChosenDate chosenDate = ChosenDate.from(chosenDateDto);
+
+        eventInfo.updateSpecialDiscount(chosenDate);
+
+        return eventInfo.toDto();
+    }
+
     private String[] parseOrderInput(String orderInput) {
         return orderInput.split(",");
     }

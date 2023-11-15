@@ -16,6 +16,7 @@ public class EventInfo {
     private ChristmasDiscount christmasDiscount;
     private WeekdayDiscount weekdayDiscount;
     private WeekendDiscount weekendDiscount;
+    private SpecialDiscount specialDiscount;
     private Badge badge;
 
     public EventInfo(Payment payment) {
@@ -24,16 +25,19 @@ public class EventInfo {
         christmasDiscount = new ChristmasDiscount();
         weekdayDiscount = new WeekdayDiscount();
         weekendDiscount = new WeekendDiscount();
+        specialDiscount = new SpecialDiscount();
         badge = Badge.NONE;
     }
 
     private EventInfo(Payment payment, Giveaway giveaway, ChristmasDiscount christmasDiscount,
-                      WeekdayDiscount weekdayDiscount, WeekendDiscount weekendDiscount, Badge badge) {
+                      WeekdayDiscount weekdayDiscount, WeekendDiscount weekendDiscount,
+                      SpecialDiscount specialDiscount, Badge badge) {
         this.payment = payment;
         this.giveaway = giveaway;
         this.christmasDiscount = christmasDiscount;
         this.weekdayDiscount = weekdayDiscount;
         this.weekendDiscount = weekendDiscount;
+        this.specialDiscount = specialDiscount;
         this.badge = badge;
     }
 
@@ -44,6 +48,7 @@ public class EventInfo {
                 ChristmasDiscount.from(eventInfoDto.getChristmasDiscountDto()),
                 WeekdayDiscount.from(eventInfoDto.getWeekdayDiscountDto()),
                 WeekendDiscount.from(eventInfoDto.getWeekendDiscountDto()),
+                SpecialDiscount.from(eventInfoDto.getSpecialDiscountDto()),
                 eventInfoDto.getBadge()
         );
     }
@@ -55,13 +60,14 @@ public class EventInfo {
         EventInfo eventInfo = (EventInfo) o;
         return Objects.equals(payment, eventInfo.payment) && Objects.equals(giveaway, eventInfo.giveaway)
                 && Objects.equals(christmasDiscount, eventInfo.christmasDiscount)
-                && Objects.equals(weekdayDiscount, eventInfo.weekdayDiscount) &&
-                Objects.equals(weekendDiscount, eventInfo.weekendDiscount) && badge == eventInfo.badge;
+                && Objects.equals(weekdayDiscount, eventInfo.weekdayDiscount)
+                && Objects.equals(weekendDiscount, eventInfo.weekendDiscount)
+                && Objects.equals(specialDiscount, eventInfo.specialDiscount) && badge == eventInfo.badge;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(payment, giveaway, christmasDiscount, weekdayDiscount, weekendDiscount, badge);
+        return Objects.hash(payment, giveaway, christmasDiscount, weekdayDiscount, weekendDiscount, specialDiscount, badge);
     }
 
     public EventInfoDto toDto() {
@@ -70,9 +76,10 @@ public class EventInfo {
         ChristmasDiscountDto christmasDiscountDto = christmasDiscount.toDto();
         WeekdayDiscountDto weekdayDiscountDto = weekdayDiscount.toDto();
         WeekendDiscountDto weekendDiscountDto = weekendDiscount.toDto();
+        SpecialDiscountDto specialDiscountDto = specialDiscount.toDto();
 
         return EventInfoDto.of(paymentDto, giveawayDto, christmasDiscountDto,
-                weekdayDiscountDto, weekendDiscountDto, badge);
+                weekdayDiscountDto, weekendDiscountDto, specialDiscountDto, badge);
     }
 
     public void updateGiveawayApplication(Payment payment) {
@@ -97,5 +104,14 @@ public class EventInfo {
 
         weekendDiscount = WeekendDiscount.from(order);
         payment.updateDiscountAmount(weekendDiscount);
+    }
+
+    public void updateSpecialDiscount(ChosenDate chosenDate) {
+        boolean isSpecialDay = chosenDate.isSpecialDay();
+
+        if (isSpecialDay) {
+            specialDiscount = SpecialDiscount.updateDiscount();
+            payment.updateDiscountAmount(specialDiscount);
+        }
     }
 }

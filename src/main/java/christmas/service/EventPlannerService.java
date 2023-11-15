@@ -22,4 +22,6 @@ public interface EventPlannerService {
     EventInfoDto computeChristmasDiscountApplication(EventInfoDto eventInfoDto, ChosenDateDto chosenDateDto);
 
     EventInfoDto computeDayOfWeekDiscount(EventInfoDto eventInfoDto, ChosenDateDto chosenDateDto, OrderDto orderDto);
+
+    EventInfoDto computeSpecialDiscount(EventInfoDto eventInfoDto, ChosenDateDto chosenDateDto);
 }
