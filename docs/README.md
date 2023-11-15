@@ -150,7 +150,8 @@
     - [x] 출력 내용: "[ERROR] 예상 결제 금액은 0 이하가 될 수 없습니다. 전송된 금액: {paymentAmount}"
 
 ##### 할인 금액
-- [ ] IllegalArgumentException 발생
-    - [ ] 발생 상황
-      - 할인 금액이 0 미만인 경우
-    - [ ] 출력 내용: "[ERROR] 할인 금액은 0보다 작을 수 없습니다. 전송된 금액: {discountAmount}"
+
+- [x] IllegalArgumentException 발생
+    - [x] 발생 상황
+        - [x] 할인 금액이 0 미만인 경우
+    - [x] 출력 내용: "[ERROR] 할인 금액은 0보다 작을 수 없습니다. 전송된 금액: {discountAmount}"
