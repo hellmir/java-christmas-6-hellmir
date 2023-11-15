@@ -230,7 +230,7 @@ class EventPlannerServiceTest {
         assertThat(giveaway.isNone()).isTrue();
     }
 
-    @DisplayName("25일 이전의 날짜와 할인 가능한 예상 결제 금액을 전송하면 크리스마이 디데이 이벤트가 적용된다.")
+    @DisplayName("25일 이전의 날짜와 할인 가능한 예상 결제 금액을 전송하면 크리스마스 디데이 이벤트가 적용된다.")
     @ParameterizedTest
     @CsvSource({"1, 30_000",
             "10, 10_000",
@@ -255,7 +255,7 @@ class EventPlannerServiceTest {
         assertThat(paymentAmountAfterDiscount).isEqualTo(paymentAmount - discountAmount);
     }
 
-    @DisplayName("26일 이후의 날짜를 전송하면 크리스마이 디데이 이벤트가 적용되지 않는다.")
+    @DisplayName("26일 이후의 날짜를 전송하면 크리스마스 디데이 이벤트가 적용되지 않는다.")
     @ParameterizedTest
     @CsvSource({"26, 30_000",
             "27, 10_000",
