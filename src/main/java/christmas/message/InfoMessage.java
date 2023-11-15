@@ -19,4 +19,14 @@ public class InfoMessage {
     public static final String TOTAL_ORDER_PRICE_MESSAGE_HEAD = "<할인 전 총주문 금액>";
     public static final String GIVEAWAY_MESSAGE_HEAD = "<증정 메뉴>";
     public static final String NONE = "없음";
+    public static final String BENEFIT_LIST_MESSAGE_HEAD = "<혜택 내역>";
+    public static final String CHRISTMAS_BENEFIT_MESSAGE = "크리스마스 디데이 할인: -";
+    public static final String WEEKDAY_BENEFIT_MESSAGE = "평일 할인: -";
+    public static final String WEEKEND_BENEFIT_MESSAGE = "주말 할인: -";
+    public static final String SPECIAL_BENEFIT_MESSAGE = "특별 할인: -";
+    public static final String GIVEAWAY_BENEFIT_MESSAGE = "증정 이벤트: -";
+    public static final String BENEFIT_AMOUNT_MESSAGE_HEAD = "<총혜택 금액>";
+    public static final String EXPECTED_PAYMENT_MESSAGE_HEAD = "<할인 후 예상 결제 금액>";
+    public static final String BADGE_MESSAGE_HEAD = "<12월 이벤트 배지>";
+
 }

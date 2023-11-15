@@ -33,4 +33,8 @@ public enum Badge {
     public int getBenefitAmount() {
         return benefitAmount;
     }
+
+    public String getKoreanName() {
+        return koreanName;
+    }
 }
