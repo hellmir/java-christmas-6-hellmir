@@ -223,4 +223,24 @@ class EventInfoTest {
                 .hasMessage(ERROR_MESSAGE_HEAD + PAYMENT_AMOUNT_UNDER_ZERO_EXCEPTION
                         + (paymentAmount - discountAmount));
     }
+
+    @DisplayName("이벤트 달력에 별이 있는 날짜를 전송하면 할인한다.")
+    @ParameterizedTest
+    @CsvSource({
+            "3, 3_000",
+            "17, 2_400",
+            "31, 30_000"
+    })
+    void updateSpecialDiscount(String chosenDateInput, int paymentAmount) {
+        // given
+        Payment payment = new Payment(paymentAmount);
+        EventInfo eventInfo = new EventInfo(payment);
+        ChosenDate chosenDate = ChosenDate.from(chosenDateInput);
+
+        // when
+        eventInfo.updateSpecialDiscount(chosenDate);
+
+        // then
+        assertThat(eventInfo).isNotEqualTo(new EventInfo(payment));
+    }
 }

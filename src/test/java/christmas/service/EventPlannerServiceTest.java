@@ -2,6 +2,7 @@ package christmas.service;
 
 import christmas.domain.event.Badge;
 import christmas.domain.event.ChosenDate;
+import christmas.domain.event.EventInfo;
 import christmas.domain.order.MenuInformation;
 import christmas.domain.order.Order;
 import christmas.domain.order.OrderMenu;
@@ -313,6 +314,28 @@ class EventPlannerServiceTest {
         // then
         assertThat(weekendDiscountAmount).isEqualTo(discountAmount);
         assertThat(paymentAmountAfterDiscount).isEqualTo(paymentAmount - discountAmount);
+    }
+
+    @DisplayName("이벤트 달력에 별이 있는 날짜를 전송하면 1,000원 할인한다.")
+    @ParameterizedTest
+    @CsvSource({
+            "3, 30_000",
+            "24, 24_000",
+            "31, 30_000"
+    })
+    void computeSpecialDiscount(String chosenDateInput, int paymentAmount) {
+        // given
+        EventInfoDto eventInfoDto = setEventInfoDto(paymentAmount);
+        ChosenDateDto chosenDateDto = ChosenDate.from(chosenDateInput).toDto();
+
+        // when
+        eventInfoDto = eventPlannerService.computeSpecialDiscount(eventInfoDto, chosenDateDto);
+        int specialDiscountAmount = eventInfoDto.getSpecialDiscountDto().getDiscountDto().getDiscountAmount();
+        int paymentAmountAfterDiscount = eventInfoDto.getPaymentDto().getPaymentAmount();
+
+        // then
+        assertThat(specialDiscountAmount).isEqualTo(SPECIAL_DAY_DISCOUNT_AMOUNT);
+        assertThat(paymentAmountAfterDiscount).isEqualTo(paymentAmount - SPECIAL_DAY_DISCOUNT_AMOUNT);
     }
 
     private void setOrderInformation(String orderInput, List<String> koreanMenuNames, List<Integer> menuQuantities) {
