@@ -231,8 +231,7 @@ class EventPlannerServiceTest {
     void computeChristmasDiscountApplicationWithTwentyFifthOrEarlierAndDiscountAvailableAmount
             (String chosenDateInput, int paymentAmount) {
         // given
-        PaymentDto paymentDto = new PaymentDto(paymentAmount);
-        EventInfoDto eventInfoDto = eventPlannerService.generateEventInfo(paymentDto);
+        EventInfoDto eventInfoDto = setEventInfoDto(paymentAmount);
         ChosenDateDto chosenDateDto = ChosenDate.from(chosenDateInput).toDto();
         int discountAmount = BASIC_CHRISTMAS_DISCOUNT_AMOUNT
                 + CHRISTMAS_DISCOUNT_INCREASE * (Integer.parseInt(chosenDateInput) - 1);
@@ -255,8 +254,7 @@ class EventPlannerServiceTest {
             "31, 120_000"})
     void computeChristmasDiscountApplicationWithDateAfterTwentySixth(String chosenDateInput, int paymentAmount) {
         // given
-        PaymentDto paymentDto = new PaymentDto(paymentAmount);
-        EventInfoDto eventInfoDto = eventPlannerService.generateEventInfo(paymentDto);
+        EventInfoDto eventInfoDto = setEventInfoDto(paymentAmount);
         ChosenDateDto chosenDateDto = ChosenDate.from(chosenDateInput).toDto();
 
         // when
@@ -265,6 +263,31 @@ class EventPlannerServiceTest {
 
         // then
         assertThat(christmasDiscountAmount).isEqualTo(0);
+    }
+
+    @DisplayName("전송된 날짜가 평일이면 디저트를 정해진 가격만큼 할인한다.")
+    @ParameterizedTest
+    @CsvSource({
+            "3, 30_000",
+            "14, 24_000",
+            "31, 30_000"
+    })
+    void computeEventApplicationWhenWeekday(String chosenDateInput, int paymentAmount) {
+        // given
+        EventInfoDto eventInfoDto = setEventInfoDto(paymentAmount);
+        ChosenDateDto chosenDateDto = ChosenDate.from(chosenDateInput).toDto();
+        List<OrderMenu> orderMenus = TestObjectFactory.setOrderMenus();
+        OrderDto orderDto = new Order(orderMenus).toDto();
+        int discountAmount = countDessert(orderMenus) * WEEKDAY_DISCOUNT_AMOUNT;
+
+        // when
+        eventInfoDto = eventPlannerService.computeDayOfWeekDiscount(eventInfoDto, chosenDateDto, orderDto);
+        int weekdayDiscountAmount = eventInfoDto.getWeekdayDiscountDto().getDiscountDto().getDiscountAmount();
+        int paymentAmountAfterDiscount = eventInfoDto.getPaymentDto().getPaymentAmount();
+
+        // then
+        assertThat(weekdayDiscountAmount).isEqualTo(discountAmount);
+        assertThat(paymentAmountAfterDiscount).isEqualTo(paymentAmount - discountAmount);
     }
 
     private void setOrderInformation(String orderInput, List<String> koreanMenuNames, List<Integer> menuQuantities) {
@@ -282,6 +305,11 @@ class EventPlannerServiceTest {
         assertThat(orderMenuDtos.get(2).getMenuInformation().getKoreanName()).isEqualTo(koreanMenuNames.get(2));
     }
 
+    private EventInfoDto setEventInfoDto(int paymentAmount) {
+        PaymentDto paymentDto = new PaymentDto(paymentAmount);
+        return eventPlannerService.generateEventInfo(paymentDto);
+    }
+
     private void checkEventComponentValues(boolean isEventApplied, MenuInformation giveaway,
                                            int christmasDiscountAmount, int weekdayDiscountAmount,
                                            int weekendDiscountAmount, Badge badge) {
@@ -291,5 +319,17 @@ class EventPlannerServiceTest {
         assertThat(weekdayDiscountAmount).isEqualTo(0);
         assertThat(weekendDiscountAmount).isEqualTo(0);
         assertThat(badge.isNone()).isTrue();
+    }
+
+    private int countDessert(List<OrderMenu> orderMenus) {
+        int dessertCount = 0;
+
+        for (OrderMenu orderMenu : orderMenus) {
+            if (orderMenu.isDessert()) {
+                ++dessertCount;
+            }
+        }
+
+        return dessertCount;
     }
 }

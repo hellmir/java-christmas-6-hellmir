@@ -1,10 +1,15 @@
 package christmas.domain.event;
 
+import christmas.domain.order.Order;
+import christmas.domain.order.OrderMenu;
 import christmas.domain.order.Payment;
+import christmas.testutil.TestObjectFactory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+
+import java.util.List;
 
 import static christmas.configuration.EventConfig.EVENT_APPLIED_AMOUNT;
 import static christmas.message.ErrorMessage.ERROR_MESSAGE_HEAD;
@@ -120,5 +125,28 @@ class EventInfoTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ERROR_MESSAGE_HEAD + PAYMENT_AMOUNT_UNDER_ZERO_EXCEPTION
                         + (paymentAmount - discountAmount));
+    }
+
+    @DisplayName("전송된 날짜가 평일이면 디저트를 할인한다.")
+    @ParameterizedTest
+    @CsvSource({
+            "3, 3_000",
+            "14, 2_400",
+            "31, 30_000"
+    })
+    void updateDayOfWeekDiscountWhenWeekday(String chosenDateInput, int paymentAmount) {
+        // given
+        Payment payment = new Payment(paymentAmount);
+        EventInfo eventInfo = new EventInfo(payment);
+        ChosenDate chosenDate = ChosenDate.from(chosenDateInput);
+
+        List<OrderMenu> orderMenus = TestObjectFactory.setOrderMenus();
+        Order order = new Order(orderMenus);
+
+        // when
+        eventInfo.updateDayOfWeekDiscount(chosenDate, order);
+
+        // then
+        assertThat(eventInfo).isNotEqualTo(new EventInfo(payment));
     }
 }
