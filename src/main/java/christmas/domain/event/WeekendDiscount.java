@@ -1,5 +1,6 @@
 package christmas.domain.event;
 
+import christmas.domain.order.Order;
 import christmas.dto.event.WeekendDiscountDto;
 
 import java.util.Objects;
@@ -20,6 +21,11 @@ public class WeekendDiscount {
         return new WeekendDiscount(discount);
     }
 
+    public static WeekendDiscount from(Order order) {
+        Discount discount = order.computeMainDiscount();
+        return new WeekendDiscount(discount);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -35,5 +41,10 @@ public class WeekendDiscount {
 
     public WeekendDiscountDto toDto() {
         return new WeekendDiscountDto(discount.toDto());
+    }
+
+    public int reducePaymentAmount(int paymentAmount) {
+        return discount.reducePaymentAmount(paymentAmount);
+
     }
 }

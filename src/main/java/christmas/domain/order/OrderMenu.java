@@ -42,4 +42,8 @@ public class OrderMenu {
     public boolean isDessert() {
         return menuInformation.isDessert();
     }
+
+    public boolean isMain() {
+        return menuInformation.isMain();
+    }
 }

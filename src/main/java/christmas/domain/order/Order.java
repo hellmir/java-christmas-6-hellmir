@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Objects;
 
 import static christmas.configuration.EventConfig.WEEKDAY_DISCOUNT_AMOUNT;
+import static christmas.configuration.EventConfig.WEEKEND_DISCOUNT_AMOUNT;
 import static christmas.configuration.OrderConfig.MAX_MENU_QUANTITY;
 import static christmas.message.ErrorMessage.*;
 
@@ -110,6 +111,18 @@ public class Order {
         }
 
         return new Discount(dessertQuantity * WEEKDAY_DISCOUNT_AMOUNT);
+    }
+
+    public Discount computeMainDiscount() {
+        int mainQuantity = 0;
+
+        for (OrderMenu orderMenu : orderMenus) {
+            if (orderMenu.isMain()) {
+                ++mainQuantity;
+            }
+        }
+
+        return new Discount(mainQuantity * WEEKEND_DISCOUNT_AMOUNT);
     }
 
     private void validateTotalMenuQuantity() {

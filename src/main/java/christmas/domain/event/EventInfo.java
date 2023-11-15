@@ -94,5 +94,8 @@ public class EventInfo {
             payment.updateDiscountAmount(weekdayDiscount);
             return;
         }
+
+        weekendDiscount = WeekendDiscount.from(order);
+        payment.updateDiscountAmount(weekendDiscount);
     }
 }
