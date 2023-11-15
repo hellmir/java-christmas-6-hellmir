@@ -1,6 +1,7 @@
 package christmas.domain.event;
 
 import christmas.domain.order.Payment;
+import christmas.dto.event.*;
 
 import java.util.Objects;
 
@@ -39,5 +40,14 @@ public class EventInfo {
     public void updateChristmasDiscount(ChosenDate chosenDate, Payment payment) {
         christmasDiscount = ChristmasDiscount.from(chosenDate);
         payment.updateDiscountAmount(christmasDiscount);
+    }
+
+    public EventInfoDto toDto() {
+        GiveawayDto giveawayDto = giveaway.toDto();
+        ChristmasDiscountDto christmasDiscountDto = christmasDiscount.toDto();
+        WeekdayDiscountDto weekdayDiscountDto = weekdayDiscount.toDto();
+        WeekendDiscountDto weekendDiscountDto = weekendDiscount.toDto();
+
+        return EventInfoDto.of(giveawayDto, christmasDiscountDto, weekdayDiscountDto, weekendDiscountDto, badge);
     }
 }

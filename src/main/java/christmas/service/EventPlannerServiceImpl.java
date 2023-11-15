@@ -5,6 +5,7 @@ import christmas.domain.event.EventInfo;
 import christmas.domain.order.Order;
 import christmas.domain.order.Payment;
 import christmas.dto.event.ChosenDateDto;
+import christmas.dto.event.EventInfoDto;
 import christmas.dto.order.OrderDto;
 import christmas.dto.order.PaymentDto;
 
@@ -37,17 +38,19 @@ public class EventPlannerServiceImpl implements EventPlannerService {
     }
 
     @Override
-    public EventInfo computeEventApplication(ChosenDateDto chosenDateDto, OrderDto orderDto, PaymentDto paymentDto) {
+    public EventInfoDto computeEventApplication(ChosenDateDto chosenDateDto, OrderDto orderDto, PaymentDto paymentDto) {
+        ChosenDate chosenDate = ChosenDate.from(chosenDateDto);
+        Order order = Order.from(orderDto);
         Payment payment = Payment.from(paymentDto);
         EventInfo eventInfo = new EventInfo();
         if (!payment.isEventApplied()) {
-            return eventInfo;
+            return new EventInfoDto();
         }
 
         eventInfo.updateGiveawayApplication(payment);
         eventInfo.updateChristmasDiscount(chosenDate, payment);
 
-        return null;
+        return eventInfo.toDto();
     }
 
     private String[] parseOrderInput(String orderInput) {

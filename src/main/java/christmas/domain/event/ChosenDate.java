@@ -20,6 +20,10 @@ public class ChosenDate {
         return new ChosenDate(Integer.parseInt(chosenDateInput));
     }
 
+    public static ChosenDate from(ChosenDateDto chosenDateDto) {
+        return new ChosenDate(chosenDateDto.getChosenDate());
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

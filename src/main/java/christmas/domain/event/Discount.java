@@ -1,5 +1,7 @@
 package christmas.domain.event;
 
+import christmas.dto.event.DiscountDto;
+
 import java.util.Objects;
 
 import static christmas.message.ErrorMessage.DISCOUNT_AMOUNT_UNDER_ZERO_EXCEPTION;
@@ -24,6 +26,10 @@ public class Discount {
     @Override
     public int hashCode() {
         return Objects.hash(discountAmount);
+    }
+
+    public DiscountDto toDto() {
+        return new DiscountDto(discountAmount);
     }
 
     public int reducePaymentAmount(int paymentAmount) {

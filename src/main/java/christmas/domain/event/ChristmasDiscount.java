@@ -1,5 +1,7 @@
 package christmas.domain.event;
 
+import christmas.dto.event.ChristmasDiscountDto;
+
 import java.util.Objects;
 
 public class ChristmasDiscount {
@@ -29,5 +31,9 @@ public class ChristmasDiscount {
 
     public int reducePaymentAmount(int paymentAmount) {
         return discount.reducePaymentAmount(paymentAmount);
+    }
+
+    public ChristmasDiscountDto toDto() {
+        return new ChristmasDiscountDto(discount.toDto());
     }
 }
