@@ -40,12 +40,13 @@ public class EventPlannerServiceImpl implements EventPlannerService {
     public EventInfo computeEventApplication(ChosenDateDto chosenDateDto, OrderDto orderDto, PaymentDto paymentDto) {
         Payment payment = Payment.from(paymentDto);
         EventInfo eventInfo = new EventInfo();
-
         if (!payment.isEventApplied()) {
             return eventInfo;
         }
 
         eventInfo.updateGiveawayApplication(payment);
+        eventInfo.updateChristmasDiscount(chosenDate, payment);
+
         return null;
     }
 

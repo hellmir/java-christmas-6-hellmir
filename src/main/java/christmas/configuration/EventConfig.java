@@ -9,4 +9,6 @@ public class EventConfig {
     public static final int EVENT_APPLIED_AMOUNT = 10_000;
     public static final int GIVEAWAY_APPLIED_AMOUNT = 120_000;
     public static final MenuInformation GIVEAWAY_PRODUCT = CHAMPAGNE;
+    public static final int BASIC_CHRISTMAS_DISCOUNT_AMOUNT = 1_000;
+    public static final int CHRISTMAS_DISCOUNT_INCREASE = 100;
 }

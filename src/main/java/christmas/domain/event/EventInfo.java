@@ -35,4 +35,9 @@ public class EventInfo {
             giveaway = new Giveaway(GIVEAWAY_PRODUCT);
         }
     }
+
+    public void updateChristmasDiscount(ChosenDate chosenDate, Payment payment) {
+        christmasDiscount = ChristmasDiscount.from(chosenDate);
+        payment.updateDiscountAmount(christmasDiscount);
+    }
 }

@@ -1,5 +1,6 @@
 package christmas.domain.order;
 
+import christmas.domain.event.ChristmasDiscount;
 import christmas.dto.order.PaymentDto;
 
 import java.util.Objects;
@@ -44,6 +45,11 @@ public class Payment {
 
     public boolean isGiveawayApplied() {
         return paymentAmount >= GIVEAWAY_APPLIED_AMOUNT;
+    }
+
+    public void updateDiscountAmount(ChristmasDiscount christmasDiscount) {
+        paymentAmount -= christmasDiscount.reducePaymentAmount(paymentAmount);
+        validate(paymentAmount);
     }
 
     private void validate(int paymentAmount) {
