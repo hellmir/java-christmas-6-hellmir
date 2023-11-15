@@ -12,6 +12,10 @@ public class Giveaway {
         this.giveaway = giveaway;
     }
 
+    public static Giveaway from(GiveawayDto giveawayDto) {
+        return new Giveaway(giveawayDto.getGiveaway());
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

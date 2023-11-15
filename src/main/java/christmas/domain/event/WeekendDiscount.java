@@ -15,6 +15,11 @@ public class WeekendDiscount {
         this.discount = discount;
     }
 
+    public static WeekendDiscount from(WeekendDiscountDto weekendDiscountDto) {
+        Discount discount = Discount.from(weekendDiscountDto.getDiscountDto());
+        return new WeekendDiscount(discount);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

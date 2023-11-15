@@ -24,7 +24,7 @@ public class EventPlannerController {
         PaymentDto paymentDto = eventPlannerService.computeTotalPayment(orderDto);
         PrintHandler.printTotalOrderPrice(paymentDto);
 
-        EventInfoDto eventInfoDto = eventPlannerService.computeEventApplication(chosenDateDto, orderDto, paymentDto);
+        EventInfoDto eventInfoDto = computeEventApplications(chosenDateDto, orderDto, paymentDto);
     }
 
     private static ChosenDateDto receiveDateInput() {
@@ -47,5 +47,20 @@ public class EventPlannerController {
                 OutputView.printMessage(e.getMessage());
             }
         }
+    }
+
+    private static EventInfoDto computeEventApplications
+            (ChosenDateDto chosenDateDto, OrderDto orderDto, PaymentDto paymentDto) {
+        EventInfoDto eventInfoDto = eventPlannerService.generateEventInfo(paymentDto);
+        boolean isEventApplied = eventPlannerService.checkIsEventApplied(paymentDto);
+
+        if (!isEventApplied) {
+            return eventInfoDto;
+        }
+
+        eventInfoDto = eventPlannerService.computeGiveawayApplication(eventInfoDto, paymentDto);
+        eventInfoDto = eventPlannerService.computeChristmasDiscountApplication(eventInfoDto, chosenDateDto);
+
+        return eventInfoDto;
     }
 }

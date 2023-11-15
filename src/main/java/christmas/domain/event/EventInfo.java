@@ -26,6 +26,27 @@ public class EventInfo {
         badge = Badge.NONE;
     }
 
+    private EventInfo(Payment payment, Giveaway giveaway, ChristmasDiscount christmasDiscount,
+                      WeekdayDiscount weekdayDiscount, WeekendDiscount weekendDiscount, Badge badge) {
+        this.payment = payment;
+        this.giveaway = giveaway;
+        this.christmasDiscount = christmasDiscount;
+        this.weekdayDiscount = weekdayDiscount;
+        this.weekendDiscount = weekendDiscount;
+        this.badge = badge;
+    }
+
+    public static EventInfo from(EventInfoDto eventInfoDto) {
+        return new EventInfo(
+                Payment.from(eventInfoDto.getPaymentDto()),
+                Giveaway.from(eventInfoDto.getGiveawayDto()),
+                ChristmasDiscount.from(eventInfoDto.getChristmasDiscountDto()),
+                WeekdayDiscount.from(eventInfoDto.getWeekdayDiscountDto()),
+                WeekendDiscount.from(eventInfoDto.getWeekendDiscountDto()),
+                eventInfoDto.getBadge()
+        );
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

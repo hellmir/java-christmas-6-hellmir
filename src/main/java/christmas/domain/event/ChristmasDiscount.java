@@ -20,6 +20,12 @@ public class ChristmasDiscount {
         return new ChristmasDiscount(discount);
     }
 
+    public static ChristmasDiscount from(ChristmasDiscountDto christmasDiscountDto) {
+        Discount discount = Discount.from(christmasDiscountDto.getDiscountDto());
+        return new ChristmasDiscount(discount);
+    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

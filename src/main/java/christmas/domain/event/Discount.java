@@ -15,6 +15,10 @@ public class Discount {
         this.discountAmount = discountAmount;
     }
 
+    public static Discount from(DiscountDto discountDto) {
+        return new Discount(discountDto.getDiscountAmount());
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -38,16 +38,32 @@ public class EventPlannerServiceImpl implements EventPlannerService {
     }
 
     @Override
-    public EventInfoDto computeEventApplication(ChosenDateDto chosenDateDto, OrderDto orderDto, PaymentDto paymentDto) {
-        ChosenDate chosenDate = ChosenDate.from(chosenDateDto);
-        Order order = Order.from(orderDto);
+    public EventInfoDto generateEventInfo(PaymentDto paymentDto) {
         Payment payment = Payment.from(paymentDto);
-        EventInfo eventInfo = new EventInfo(payment);
-        if (!payment.isEventApplied()) {
-            return eventInfo.toDto();
-        }
+        return new EventInfo(payment).toDto();
+    }
+
+    @Override
+    public boolean checkIsEventApplied(PaymentDto paymentDto) {
+        Payment payment = Payment.from(paymentDto);
+        return payment.isEventApplied();
+    }
+
+    @Override
+    public EventInfoDto computeGiveawayApplication(EventInfoDto eventInfoDto, PaymentDto paymentDto) {
+        EventInfo eventInfo = EventInfo.from(eventInfoDto);
+        Payment payment = Payment.from(paymentDto);
 
         eventInfo.updateGiveawayApplication(payment);
+
+        return eventInfo.toDto();
+    }
+
+    @Override
+    public EventInfoDto computeChristmasDiscountApplication(EventInfoDto eventInfoDto, ChosenDateDto chosenDateDto) {
+        EventInfo eventInfo = EventInfo.from(eventInfoDto);
+        ChosenDate chosenDate = ChosenDate.from(chosenDateDto);
+
         eventInfo.updateChristmasDiscount(chosenDate);
 
         return eventInfo.toDto();

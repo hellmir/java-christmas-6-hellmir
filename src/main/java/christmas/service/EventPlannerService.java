@@ -12,5 +12,12 @@ public interface EventPlannerService {
 
     PaymentDto computeTotalPayment(OrderDto orderDto);
 
-    EventInfoDto computeEventApplication(ChosenDateDto chosenDateDto, OrderDto orderDto, PaymentDto paymentDto);
+
+    boolean checkIsEventApplied(PaymentDto paymentDto);
+
+    EventInfoDto generateEventInfo(PaymentDto paymentDto);
+
+    EventInfoDto computeGiveawayApplication(EventInfoDto eventInfoDto, PaymentDto paymentDto);
+
+    EventInfoDto computeChristmasDiscountApplication(EventInfoDto eventInfoDto, ChosenDateDto chosenDateDto);
 }
