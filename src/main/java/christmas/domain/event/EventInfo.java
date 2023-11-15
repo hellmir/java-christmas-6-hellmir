@@ -42,6 +42,17 @@ public class EventInfo {
         return Objects.hash(payment, giveaway, christmasDiscount, weekdayDiscount, weekendDiscount, badge);
     }
 
+    public EventInfoDto toDto() {
+        PaymentDto paymentDto = payment.toDto();
+        GiveawayDto giveawayDto = giveaway.toDto();
+        ChristmasDiscountDto christmasDiscountDto = christmasDiscount.toDto();
+        WeekdayDiscountDto weekdayDiscountDto = weekdayDiscount.toDto();
+        WeekendDiscountDto weekendDiscountDto = weekendDiscount.toDto();
+
+        return EventInfoDto.of(paymentDto, giveawayDto, christmasDiscountDto,
+                weekdayDiscountDto, weekendDiscountDto, badge);
+    }
+
     public void updateGiveawayApplication(Payment payment) {
         if (payment.isGiveawayApplied()) {
             giveaway = new Giveaway(GIVEAWAY_PRODUCT);
@@ -53,14 +64,5 @@ public class EventInfo {
         payment.updateDiscountAmount(christmasDiscount);
     }
 
-    public EventInfoDto toDto() {
-        PaymentDto paymentDto = payment.toDto();
-        GiveawayDto giveawayDto = giveaway.toDto();
-        ChristmasDiscountDto christmasDiscountDto = christmasDiscount.toDto();
-        WeekdayDiscountDto weekdayDiscountDto = weekdayDiscount.toDto();
-        WeekendDiscountDto weekendDiscountDto = weekendDiscount.toDto();
-
-        return EventInfoDto.of(paymentDto, giveawayDto, christmasDiscountDto,
-                weekdayDiscountDto, weekendDiscountDto, badge);
     }
 }
