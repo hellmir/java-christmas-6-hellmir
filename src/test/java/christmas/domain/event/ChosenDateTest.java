@@ -19,4 +19,36 @@ class ChosenDateTest {
         // then
         assertThat(chosenDate).isEqualTo(ChosenDate.from(chosenDateInput));
     }
+
+    @DisplayName("평일을 확인할 수 있다.")
+    @ParameterizedTest
+    @CsvSource({
+            "3", "11", "14", "31"
+    })
+    void isWeekday(String chosenDateInput) {
+        // given
+        ChosenDate chosenDate = ChosenDate.from(chosenDateInput);
+
+        // when
+        boolean isWeekday = chosenDate.isWeekday();
+
+        // then
+        assertThat(isWeekday).isTrue();
+    }
+
+    @DisplayName("주말을 확인할 수 있다.")
+    @ParameterizedTest
+    @CsvSource({
+            "1", "9", "23", "29"
+    })
+    void isWeekEnd(String chosenDateInput) {
+        // given
+        ChosenDate chosenDate = ChosenDate.from(chosenDateInput);
+
+        // when
+        boolean isWeekday = chosenDate.isWeekday();
+
+        // then
+        assertThat(isWeekday).isFalse();
+    }
 }
