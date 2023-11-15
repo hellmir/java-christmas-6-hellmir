@@ -3,6 +3,7 @@ package christmas.service;
 import christmas.domain.order.Order;
 import christmas.domain.order.OrderMenu;
 import christmas.dto.event.ChosenDateDto;
+import christmas.dto.event.EventInfoDto;
 import christmas.dto.order.OrderDto;
 import christmas.dto.order.OrderMenuDto;
 import christmas.dto.order.PaymentDto;
@@ -160,7 +161,28 @@ class EventPlannerServiceTest {
         PaymentDto paymentDto = eventPlannerService.computeTotalPayment(orderDto);
 
         // then
-        assertThat(paymentDto.getPayment()).isEqualTo(menuPrice1 + menuPrice2 + menuPrice3 + menuPrice4);
+        assertThat(paymentDto.getPaymentAmount()).isEqualTo(menuPrice1 + menuPrice2 + menuPrice3 + menuPrice4);
+    }
+
+    @DisplayName("총주문금액이 10,000원 미만이면 이벤트 객체를 반환하지 않는다.")
+    @ParameterizedTest
+    @CsvSource({"1", "1_000", "9_999"})
+    void computeEventApplicationWithUnderEventAppliedAmount(int paymentAmount) {
+        // given
+        ChosenDateDto chosenDateDto = mock(ChosenDateDto.class);
+        OrderDto orderDto = mock(OrderDto.class);
+        PaymentDto paymentDto = new PaymentDto(paymentAmount);
+
+        // when
+        EventInfoDto eventInfoDto = eventPlannerService.computeEventApplication(chosenDateDto, orderDto, paymentDto);
+
+        // then
+        assertThat(eventInfoDto.getGiveawayDto()).isEqualTo(null);
+        assertThat(eventInfoDto.getChristmasDiscountDto()).isEqualTo(null);
+        assertThat(eventInfoDto.getWeekdayDiscountDto()).isEqualTo(null);
+        assertThat(eventInfoDto.getWeekendDiscountDto()).isEqualTo(null);
+        assertThat(eventInfoDto.getBadge()).isEqualTo(null);
+    }
     }
 
     private void setOrderInformation(String orderInput, List<String> koreanMenuNames, List<Integer> menuQuantities) {
