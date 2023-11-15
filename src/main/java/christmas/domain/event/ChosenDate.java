@@ -1,12 +1,16 @@
 package christmas.domain.event;
 
+import christmas.domain.date.DayInfo;
 import christmas.dto.event.ChosenDateDto;
 import christmas.validation.InputFormatValidator;
 
+import java.time.LocalDate;
 import java.util.Objects;
 
 import static christmas.configuration.EventConfig.BASIC_CHRISTMAS_DISCOUNT_AMOUNT;
 import static christmas.configuration.EventConfig.CHRISTMAS_DISCOUNT_INCREASE;
+import static christmas.configuration.PeriodConfig.MONTH;
+import static christmas.configuration.PeriodConfig.YEAR;
 
 public class ChosenDate {
     private final int chosenDate;
@@ -48,5 +52,12 @@ public class ChosenDate {
         int basicDiscountAmount = BASIC_CHRISTMAS_DISCOUNT_AMOUNT;
         int increasedDiscountAmount = CHRISTMAS_DISCOUNT_INCREASE * (chosenDate - 1);
         return new Discount(basicDiscountAmount + increasedDiscountAmount);
+    }
+
+    public boolean isWeekday() {
+        LocalDate localDate = LocalDate.of(YEAR, MONTH.getMonthNumber(), chosenDate);
+        String DayOfWeek = String.valueOf(localDate.getDayOfWeek());
+
+        return DayInfo.valueOf(DayOfWeek).isWeekday();
     }
 }
