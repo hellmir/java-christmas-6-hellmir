@@ -40,9 +40,9 @@ public class SpecialDiscount {
         return new SpecialDiscountDto(discount.toDto());
     }
 
-    public static SpecialDiscount applyDiscount(Payment payment) {
+    public static SpecialDiscount applyDiscount(Payment payment, Benefit benefit) {
         Discount discount = new Discount(SPECIAL_DAY_DISCOUNT_AMOUNT);
-        discount.updateDiscountChange(payment);
+        discount.updateDiscountChange(payment, benefit);
         return new SpecialDiscount(discount);
     }
 }

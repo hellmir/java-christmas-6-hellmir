@@ -22,9 +22,9 @@ public class WeekdayDiscount {
         return new WeekdayDiscount(discount);
     }
 
-    public static WeekdayDiscount applyDiscount(Order order, Payment payment) {
+    public static WeekdayDiscount applyDiscount(Order order, Payment payment, Benefit benefit) {
         Discount discount = order.computeDessertDiscount();
-        discount.updateDiscountChange(payment);
+        discount.updateDiscountChange(payment, benefit);
         return new WeekdayDiscount(discount);
     }
 

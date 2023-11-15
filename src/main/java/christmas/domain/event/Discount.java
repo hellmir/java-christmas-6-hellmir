@@ -49,7 +49,8 @@ public class Discount {
         }
     }
 
-    public void updateDiscountChange(Payment payment) {
+    public void updateDiscountChange(Payment payment, Benefit benefit) {
         payment.reduceDiscountAmount(discountAmount);
+        benefit.addBenefitAmount(discountAmount);
     }
 }

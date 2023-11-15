@@ -10,26 +10,28 @@ public class EventInfoDto {
     private final WeekdayDiscountDto weekdayDiscountDto;
     private final WeekendDiscountDto weekendDiscountDto;
     private final SpecialDiscountDto specialDiscountDto;
+    private final BenefitDto benefitDto;
     private final Badge badge;
 
     private EventInfoDto(PaymentDto paymentDto, GiveawayDto giveawayDto, ChristmasDiscountDto christmasDiscountDto,
                          WeekdayDiscountDto weekdayDiscountDto, WeekendDiscountDto weekendDiscountDto,
-                         SpecialDiscountDto specialDiscountDto, Badge badge) {
+                         SpecialDiscountDto specialDiscountDto, BenefitDto benefitDto, Badge badge) {
         this.paymentDto = paymentDto;
         this.giveawayDto = giveawayDto;
         this.christmasDiscountDto = christmasDiscountDto;
         this.weekdayDiscountDto = weekdayDiscountDto;
         this.weekendDiscountDto = weekendDiscountDto;
         this.specialDiscountDto = specialDiscountDto;
+        this.benefitDto = benefitDto;
         this.badge = badge;
     }
 
     public static EventInfoDto of(PaymentDto paymentDto, GiveawayDto giveawayDto,
                                   ChristmasDiscountDto christmasDiscountDto, WeekdayDiscountDto weekdayDiscountDto,
-                                  WeekendDiscountDto weekendDiscountDto,
-                                  SpecialDiscountDto specialDiscountDto, Badge badge) {
+                                  WeekendDiscountDto weekendDiscountDto, SpecialDiscountDto specialDiscountDto,
+                                  BenefitDto benefitDto, Badge badge) {
         return new EventInfoDto(paymentDto, giveawayDto, christmasDiscountDto,
-                weekdayDiscountDto, weekendDiscountDto, specialDiscountDto, badge);
+                weekdayDiscountDto, weekendDiscountDto, specialDiscountDto, benefitDto, badge);
     }
 
     public PaymentDto getPaymentDto() {
@@ -54,6 +56,10 @@ public class EventInfoDto {
 
     public SpecialDiscountDto getSpecialDiscountDto() {
         return specialDiscountDto;
+    }
+
+    public BenefitDto getBenefitDto() {
+        return benefitDto;
     }
 
     public Badge getBadge() {

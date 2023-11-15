@@ -21,9 +21,9 @@ public class ChristmasDiscount {
         return new ChristmasDiscount(discount);
     }
 
-    public static ChristmasDiscount applyDiscount(ChosenDate chosenDate, Payment payment) {
+    public static ChristmasDiscount applyDiscount(ChosenDate chosenDate, Payment payment, Benefit benefit) {
         Discount discount = chosenDate.updateChristmasDiscountAmount();
-        discount.updateDiscountChange(payment);
+        discount.updateDiscountChange(payment, benefit);
         return new ChristmasDiscount(discount);
     }
 

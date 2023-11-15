@@ -22,9 +22,9 @@ public class WeekendDiscount {
         return new WeekendDiscount(discount);
     }
 
-    public static WeekendDiscount applyDiscount(Order order, Payment payment) {
+    public static WeekendDiscount applyDiscount(Order order, Payment payment, Benefit benefit) {
         Discount discount = order.computeMainDiscount();
-        discount.updateDiscountChange(payment);
+        discount.updateDiscountChange(payment, benefit);
         return new WeekendDiscount(discount);
     }
 
