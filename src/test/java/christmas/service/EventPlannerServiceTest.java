@@ -278,7 +278,7 @@ class EventPlannerServiceTest {
         ChosenDateDto chosenDateDto = ChosenDate.from(chosenDateInput).toDto();
         List<OrderMenu> orderMenus = TestObjectFactory.setOrderMenus();
         OrderDto orderDto = new Order(orderMenus).toDto();
-        int discountAmount = countDessert(orderMenus) * WEEKDAY_DISCOUNT_AMOUNT;
+        int discountAmount = TestObjectFactory.countDessert(orderMenus) * WEEKDAY_DISCOUNT_AMOUNT;
 
         // when
         eventInfoDto = eventPlannerService.computeDayOfWeekDiscount(eventInfoDto, chosenDateDto, orderDto);
@@ -287,6 +287,31 @@ class EventPlannerServiceTest {
 
         // then
         assertThat(weekdayDiscountAmount).isEqualTo(discountAmount);
+        assertThat(paymentAmountAfterDiscount).isEqualTo(paymentAmount - discountAmount);
+    }
+
+    @DisplayName("전송된 날짜가 주말이면 메인 메뉴를 정해진 가격만큼 할인한다.")
+    @ParameterizedTest
+    @CsvSource({
+            "1, 30_000",
+            "23, 24_000",
+            "29, 30_000"
+    })
+    void computeEventApplicationWhenWeekend(String chosenDateInput, int paymentAmount) {
+        // given
+        EventInfoDto eventInfoDto = setEventInfoDto(paymentAmount);
+        ChosenDateDto chosenDateDto = ChosenDate.from(chosenDateInput).toDto();
+        List<OrderMenu> orderMenus = TestObjectFactory.setOrderMenus();
+        OrderDto orderDto = new Order(orderMenus).toDto();
+        int discountAmount = TestObjectFactory.countMain(orderMenus) * WEEKEND_DISCOUNT_AMOUNT;
+
+        // when
+        eventInfoDto = eventPlannerService.computeDayOfWeekDiscount(eventInfoDto, chosenDateDto, orderDto);
+        int weekendDiscountAmount = eventInfoDto.getWeekendDiscountDto().getDiscountDto().getDiscountAmount();
+        int paymentAmountAfterDiscount = eventInfoDto.getPaymentDto().getPaymentAmount();
+
+        // then
+        assertThat(weekendDiscountAmount).isEqualTo(discountAmount);
         assertThat(paymentAmountAfterDiscount).isEqualTo(paymentAmount - discountAmount);
     }
 

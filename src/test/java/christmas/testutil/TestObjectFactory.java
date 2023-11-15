@@ -30,4 +30,16 @@ public class TestObjectFactory {
 
         return dessertCount;
     }
+
+    public static int countMain(List<OrderMenu> orderMenus) {
+        int mainCount = 0;
+
+        for (OrderMenu orderMenu : orderMenus) {
+            if (orderMenu.isDessert()) {
+                ++mainCount;
+            }
+        }
+
+        return mainCount;
+    }
 }
