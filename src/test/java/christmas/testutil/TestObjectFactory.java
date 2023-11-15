@@ -5,6 +5,8 @@ import christmas.domain.order.OrderMenu;
 import java.util.ArrayList;
 import java.util.List;
 
+import static christmas.configuration.EventConfig.BASIC_CHRISTMAS_DISCOUNT_AMOUNT;
+import static christmas.configuration.EventConfig.CHRISTMAS_DISCOUNT_INCREASE;
 import static christmas.testutil.TestConstant.*;
 
 public class TestObjectFactory {
@@ -17,6 +19,10 @@ public class TestObjectFactory {
         orderMenus.add(new OrderMenu(MENU4, QUANTITY4));
 
         return orderMenus;
+    }
+
+    public static int computeChristmasDiscountAmount(String chosenDateInput) {
+        return BASIC_CHRISTMAS_DISCOUNT_AMOUNT + CHRISTMAS_DISCOUNT_INCREASE * (Integer.parseInt(chosenDateInput) - 1);
     }
 
     public static int countDessert(List<OrderMenu> orderMenus) {

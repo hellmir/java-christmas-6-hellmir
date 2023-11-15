@@ -233,8 +233,7 @@ class EventPlannerServiceTest {
         // given
         EventInfoDto eventInfoDto = setEventInfoDto(paymentAmount);
         ChosenDateDto chosenDateDto = ChosenDate.from(chosenDateInput).toDto();
-        int discountAmount = BASIC_CHRISTMAS_DISCOUNT_AMOUNT
-                + CHRISTMAS_DISCOUNT_INCREASE * (Integer.parseInt(chosenDateInput) - 1);
+        int discountAmount = TestObjectFactory.computeChristmasDiscountAmount(chosenDateInput);
 
         // when
         eventInfoDto = eventPlannerService.computeChristmasDiscountApplication(eventInfoDto, chosenDateDto);

@@ -117,8 +117,7 @@ class EventInfoTest {
         Payment payment = new Payment(paymentAmount);
         EventInfo eventInfo = new EventInfo(payment);
         ChosenDate chosenDate = ChosenDate.from(chosenDateInput);
-        int discountAmount = BASIC_CHRISTMAS_DISCOUNT_AMOUNT
-                + CHRISTMAS_DISCOUNT_INCREASE * (Integer.parseInt(chosenDateInput) - 1);
+        int discountAmount = TestObjectFactory.computeChristmasDiscountAmount(chosenDateInput);
 
         // when, then
         assertThatThrownBy(() -> eventInfo.updateChristmasDiscount(chosenDate))
