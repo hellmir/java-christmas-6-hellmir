@@ -39,11 +39,11 @@ public class ChristmasDiscount {
         return Objects.hash(discount);
     }
 
-    public int reducePaymentAmount(int paymentAmount) {
-        return discount.reducePaymentAmount(paymentAmount);
-    }
-
     public ChristmasDiscountDto toDto() {
         return new ChristmasDiscountDto(discount.toDto());
+    }
+
+    public int reducePaymentAmount(int paymentAmount) {
+        return discount.reducePaymentAmount(paymentAmount);
     }
 }
