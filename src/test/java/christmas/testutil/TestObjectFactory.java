@@ -18,4 +18,16 @@ public class TestObjectFactory {
 
         return orderMenus;
     }
+
+    public static int countDessert(List<OrderMenu> orderMenus) {
+        int dessertCount = 0;
+
+        for (OrderMenu orderMenu : orderMenus) {
+            if (orderMenu.isDessert()) {
+                ++dessertCount;
+            }
+        }
+
+        return dessertCount;
+    }
 }

@@ -320,16 +320,4 @@ class EventPlannerServiceTest {
         assertThat(weekendDiscountAmount).isEqualTo(0);
         assertThat(badge.isNone()).isTrue();
     }
-
-    private int countDessert(List<OrderMenu> orderMenus) {
-        int dessertCount = 0;
-
-        for (OrderMenu orderMenu : orderMenus) {
-            if (orderMenu.isDessert()) {
-                ++dessertCount;
-            }
-        }
-
-        return dessertCount;
-    }
 }
