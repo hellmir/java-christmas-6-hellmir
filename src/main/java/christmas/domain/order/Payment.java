@@ -48,7 +48,7 @@ public class Payment {
     }
 
     public void updateDiscountAmount(ChristmasDiscount christmasDiscount) {
-        paymentAmount -= christmasDiscount.reducePaymentAmount(paymentAmount);
+        paymentAmount = christmasDiscount.reducePaymentAmount(paymentAmount);
         validate(paymentAmount);
     }
 
