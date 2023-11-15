@@ -50,6 +50,6 @@ public class Discount {
     }
 
     public void updateDiscountChange(Payment payment) {
-        payment.updateDiscountAmount(discountAmount);
+        payment.reduceDiscountAmount(discountAmount);
     }
 }

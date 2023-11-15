@@ -46,7 +46,7 @@ public class Payment {
         return paymentAmount >= GIVEAWAY_APPLIED_AMOUNT;
     }
 
-    public void updateDiscountAmount(int discountAmount) {
+    public void reduceDiscountAmount(int discountAmount) {
         paymentAmount -= discountAmount;
         validate(paymentAmount);
     }
