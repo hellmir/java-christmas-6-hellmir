@@ -210,6 +210,23 @@ class EventPlannerServiceTest {
         assertThat(giveaway).isEqualTo(CHAMPAGNE);
     }
 
+    @DisplayName("할인 전 총주문금액이 120,000원 미만이면 증정품을 반환하지 않는다.")
+    @ParameterizedTest
+    @CsvSource({"10", "100", "119_999"})
+    void computeEventApplicationUnderGiveawayAppliedAmount(int paymentAmount) {
+        // given
+        ChosenDateDto chosenDateDto = mock(ChosenDateDto.class);
+        OrderDto orderDto = mock(OrderDto.class);
+        PaymentDto paymentDto = new PaymentDto(paymentAmount);
+
+        // when
+        EventInfoDto eventInfoDto = eventPlannerService.computeEventApplication(chosenDateDto, orderDto, paymentDto);
+        MenuInformation giveaway = eventInfoDto.getGiveawayDto().getGiveaway();
+
+        // then
+        assertThat(giveaway.isNone()).isTrue();
+    }
+
     private void setOrderInformation(String orderInput, List<String> koreanMenuNames, List<Integer> menuQuantities) {
         String[] menus = orderInput.split(",");
 
